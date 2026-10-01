@@ -1,0 +1,15 @@
+.gradle/
+build/
+out/
+.idea/
+*.iml
+
+# Local environment and database credentials
+src/main/resources/application-local.properties
+src/main/resources/application.properties
+src/main/resources/application-prod.properties
+!src/main/resources/application-local.properties.example
+
+.env
+.env.*
+!.env.example
