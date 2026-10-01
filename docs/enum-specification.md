@@ -81,3 +81,5 @@
 | `UNAUTHORIZED` | 로그인 인증 필요 |
 | `ACCESS_DENIED` | 접근 권한 없음 |
 | `INVALID_REQUEST` | 잘못된 요청 값 |
+| `DUPLICATE_TEAM_NAME` | 이미 사용 중인 팀 이름 |
+| `TEMPLATE_NOT_FOUND` | 템플릿을 찾을 수 없음 |

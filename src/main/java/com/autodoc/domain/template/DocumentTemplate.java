@@ -29,9 +29,24 @@ public class DocumentTemplate {
         this.structureData = structureData;
         this.templateStyleData = templateStyleData;
     }
+    public DocumentTemplate(Long ownerUserId, String name, WritingFormat writingFormat,
+                            String documentType, String structureData, String templateStyleData) {
+        this.ownerUserId = ownerUserId;
+        this.templateScope = TemplateScope.USER;
+        this.name = name;
+        this.writingFormat = writingFormat;
+        this.documentType = documentType;
+        this.structureData = structureData;
+        this.templateStyleData = templateStyleData;
+    }
     public Long getId() { return id; }
+    public Long getOwnerUserId() { return ownerUserId; }
+    public TemplateScope getTemplateScope() { return templateScope; }
     public String getName() { return name; }
     public WritingFormat getWritingFormat() { return writingFormat; }
+    public String getDocumentType() { return documentType; }
+    public String getStructureData() { return structureData; }
+    public String getTemplateStyleData() { return templateStyleData; }
     public void update(String name, String documentType, String structureData, String templateStyleData) {
         this.name = name;
         this.documentType = documentType;
