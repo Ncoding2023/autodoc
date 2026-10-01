@@ -41,6 +41,11 @@ public class UserService {
         return UserResponse.from(findUser(userId));
     }
 
+    public UserResponse getUserForCurrentUser(Long userId, Long currentUserId) {
+        validateOwnership(userId, currentUserId);
+        return getUser(userId);
+    }
+
     @Transactional
     public UserResponse updateUser(Long userId, UserUpdateRequest request) {
         validateTeamExists(request.teamId());
@@ -48,6 +53,12 @@ public class UserService {
         User user = findUser(userId);
         user.updateProfile(request.teamId(), request.name(), user.getRole(), user.getStatus());
         return UserResponse.from(user);
+    }
+
+    @Transactional
+    public UserResponse updateUserForCurrentUser(Long userId, Long currentUserId, UserUpdateRequest request) {
+        validateOwnership(userId, currentUserId);
+        return updateUser(userId, request);
     }
 
     private User findUser(Long userId) {
@@ -58,6 +69,12 @@ public class UserService {
     private void validateTeamExists(Long teamId) {
         if (teamId != null && !teamRepository.existsById(teamId)) {
             throw new BusinessException(ErrorCode.TEAM_NOT_FOUND);
+        }
+    }
+
+    private void validateOwnership(Long userId, Long currentUserId) {
+        if (!userId.equals(currentUserId)) {
+            throw new BusinessException(ErrorCode.ACCESS_DENIED);
         }
     }
 }

@@ -79,3 +79,5 @@
 | `INVALID_CREDENTIALS` | 이메일 또는 비밀번호가 일치하지 않음 |
 | `INACTIVE_USER` | 비활성 회원 |
 | `UNAUTHORIZED` | 로그인 인증 필요 |
+| `ACCESS_DENIED` | 접근 권한 없음 |
+| `INVALID_REQUEST` | 잘못된 요청 값 |
