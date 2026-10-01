@@ -1,0 +1,10 @@
+package com.autodoc.common.exception;
+
+public enum ErrorCode {
+    USER_NOT_FOUND,
+    DUPLICATE_EMAIL,
+    TEAM_NOT_FOUND,
+    INVALID_CREDENTIALS,
+    INACTIVE_USER,
+    UNAUTHORIZED
+}

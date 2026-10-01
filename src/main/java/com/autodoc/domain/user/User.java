@@ -26,7 +26,9 @@ public class User {
         this.status = status;
     }
     public Long getId() { return id; }
+    public Long getTeamId() { return teamId; }
     public String getEmail() { return email; }
+    public String getPassword() { return password; }
     public String getName() { return name; }
     public UserRole getRole() { return role; }
     public UserStatus getStatus() { return status; }
