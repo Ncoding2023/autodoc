@@ -25,12 +25,16 @@ public class SheetColumn {
         this.columnOrder = columnOrder;
     }
     public Long getId() { return id; }
+    public Long getDocumentId() { return documentId; }
+    public String getColumnKey() { return columnKey; }
     public String getColumnName() { return columnName; }
     public SheetColumnType getColumnType() { return columnType; }
+    public Integer getColumnOrder() { return columnOrder; }
     public void update(String columnName, SheetColumnType columnType) {
         this.columnName = columnName;
         this.columnType = columnType;
     }
+    public void updateOrder(Integer columnOrder) { this.columnOrder = columnOrder; }
     @PrePersist void prePersist() { LocalDateTime now = LocalDateTime.now(); createdAt = now; updatedAt = now; }
     @PreUpdate void preUpdate() { updatedAt = LocalDateTime.now(); }
 }

@@ -32,7 +32,14 @@ public class Document {
         this.cautions = cautions;
     }
     public Long getId() { return id; }
+    public Long getOwnerUserId() { return ownerUserId; }
+    public Long getTemplateId() { return templateId; }
     public String getTitle() { return title; }
+    public WritingFormat getWritingFormat() { return writingFormat; }
+    public String getDocumentType() { return documentType; }
+    public String getBodyContent() { return bodyContent; }
+    public String getImportantNotes() { return importantNotes; }
+    public String getCautions() { return cautions; }
     public DocumentStatus getStatus() { return status; }
     public void updateContent(String title, String documentType, String bodyContent, String importantNotes, String cautions) {
         this.title = title;

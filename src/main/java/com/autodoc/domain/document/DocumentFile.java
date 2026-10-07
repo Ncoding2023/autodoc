@@ -33,6 +33,7 @@ public class DocumentFile {
         this.checksum = checksum;
     }
     public Long getId() { return id; }
+    public Long getDocumentId() { return documentId; }
     public String getOriginalName() { return originalName; }
     public void updateOriginalName(String originalName) { this.originalName = originalName; }
     @PrePersist void prePersist() { createdAt = LocalDateTime.now(); }

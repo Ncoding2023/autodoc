@@ -83,3 +83,7 @@
 | `INVALID_REQUEST` | 잘못된 요청 값 |
 | `DUPLICATE_TEAM_NAME` | 이미 사용 중인 팀 이름 |
 | `TEMPLATE_NOT_FOUND` | 템플릿을 찾을 수 없음 |
+| `DOCUMENT_NOT_FOUND` | 문서를 찾을 수 없음 |
+| `INVALID_DOCUMENT_FORMAT` | SHEETS 기능을 사용할 수 없는 문서 형식 |
+| `SHEET_COLUMN_NOT_FOUND` | SHEETS 열을 찾을 수 없음 |
+| `SHEET_ROW_NOT_FOUND` | SHEETS 행을 찾을 수 없음 |

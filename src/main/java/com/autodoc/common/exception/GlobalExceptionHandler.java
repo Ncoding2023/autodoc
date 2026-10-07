@@ -22,11 +22,11 @@ public class GlobalExceptionHandler {
 
     private HttpStatus statusOf(ErrorCode errorCode) {
         return switch (errorCode) {
-            case USER_NOT_FOUND, TEAM_NOT_FOUND, TEMPLATE_NOT_FOUND -> HttpStatus.NOT_FOUND;
+            case USER_NOT_FOUND, TEAM_NOT_FOUND, TEMPLATE_NOT_FOUND, DOCUMENT_NOT_FOUND, SHEET_COLUMN_NOT_FOUND, SHEET_ROW_NOT_FOUND -> HttpStatus.NOT_FOUND;
             case DUPLICATE_EMAIL, DUPLICATE_TEAM_NAME -> HttpStatus.CONFLICT;
             case INVALID_CREDENTIALS, UNAUTHORIZED -> HttpStatus.UNAUTHORIZED;
             case INACTIVE_USER, ACCESS_DENIED -> HttpStatus.FORBIDDEN;
-            case INVALID_REQUEST -> HttpStatus.BAD_REQUEST;
+            case INVALID_REQUEST, INVALID_DOCUMENT_FORMAT -> HttpStatus.BAD_REQUEST;
         };
     }
 }

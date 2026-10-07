@@ -21,6 +21,8 @@ public class SheetRow {
         this.rowData = rowData;
     }
     public Long getId() { return id; }
+    public Long getDocumentId() { return documentId; }
+    public Integer getRowNo() { return rowNo; }
     public String getRowData() { return rowData; }
     public void updateRowData(String rowData) { this.rowData = rowData; }
     @PrePersist void prePersist() { LocalDateTime now = LocalDateTime.now(); createdAt = now; updatedAt = now; }

@@ -82,7 +82,7 @@ Controller, Frontend 및 Seed 기능은 후속 요청이 있을 때 구현한다
 
 ## Frontend
 
-- React + TypeScript, Axios 공통 Instance, Tailwind CSS 4를 사용한다.
+- React + TypeScript, designAxios 공통 Instance, Tailwind CSS 4를 사용한다.
 - 반복 UI는 공통 Component로 분리하고 PC Web을 기본으로 Responsive Web을 지원한다.
 - SHEETS는 좁은 화면에서 가로 스크롤을 허용한다.
 
