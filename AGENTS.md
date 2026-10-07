@@ -82,9 +82,14 @@ Controller, Frontend 및 Seed 기능은 후속 요청이 있을 때 구현한다
 
 ## Frontend
 
-- React + TypeScript, designAxios 공통 Instance, Tailwind CSS 4를 사용한다.
+- React + TypeScript, Axios 공통 Instance, Tailwind CSS 4를 사용한다.
 - 반복 UI는 공통 Component로 분리하고 PC Web을 기본으로 Responsive Web을 지원한다.
 - SHEETS는 좁은 화면에서 가로 스크롤을 허용한다.
+- 업무용 UI는 흰색 배경, 네이비 탐색 영역, 블루 계열 주요 동작 색상을 기본으로 사용한다.
+- 기본 텍스트는 진한 남색 계열, 보조 텍스트는 회색 계열, 테두리는 연한 회색 계열을 사용한다.
+- 성공·완료는 녹색 계열, 경고는 주황색 계열, 오류·삭제는 빨간색 계열을 사용한다.
+- DOCS형은 블루 계열, SHEETS형은 청록 계열을 선택 상태 또는 배지에만 사용한다.
+- 상태 정보는 색상만으로 전달하지 않고 상태 텍스트 또는 아이콘을 함께 표시한다.
 
 ## Git과 Test
 

@@ -1,0 +1,450 @@
+<mxfile host="drawio-plugin" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36" modified="2026-10-07T07:23:25.734Z" version="22.1.22" etag="FThJy1hBQpFt5VSFZACd" type="embed" pages="8">
+  <diagram name="01 진입·문서관리" id="x-BKgTP48G-Pj0DipYCY">
+    <mxGraphModel dx="909" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="AutoDoc 화면설계 01 · 진입 및 문서 관리" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1200" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="login" value="" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="50" y="90" width="400" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lh" value="01 로그인" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" parent="1" vertex="1">
+          <mxGeometry x="50" y="90" width="400" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="logo" value="AutoDoc" style="text;html=1;fontSize=26;fontStyle=1;align=center;" parent="1" vertex="1">
+          <mxGeometry x="145" y="155" width="210" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="email" value="이메일" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="95" y="245" width="310" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="pw" value="비밀번호" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="95" y="305" width="310" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="loginbtn" value="로그인" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="95" y="375" width="310" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="signup" value="회원가입" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="95" y="440" width="310" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="dash" value="" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="500" y="90" width="430" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="dh" value="02 대시보드" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" parent="1" vertex="1">
+          <mxGeometry x="500" y="90" width="430" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="nav" value="AutoDoc   |   대시보드   문서 관리   공유받은 문서   템플릿 관리   로그아웃" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="520" y="150" width="390" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="stats" value="내 문서 12   |   공유받은 문서 3&lt;br&gt;DOCS 7   |   SHEETS 5" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="540" y="225" width="350" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="recent" value="최근 문서&lt;br&gt;&lt;br&gt;인수인계서 · DOCS · 2026-09-23&lt;br&gt;업무 목록 · SHEETS · 2026-09-22" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="540" y="325" width="350" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="new" value="＋ 새 문서 작성" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="650" y="510" width="160" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="list" value="" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="980" y="90" width="470" height="500" as="geometry" />
+        </mxCell>
+        <mxCell id="lsh" value="03 문서 목록" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" parent="1" vertex="1">
+          <mxGeometry x="980" y="90" width="470" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="search" value="[ 내 문서 ]  [ 공유받은 문서 ]&lt;br&gt;제목 검색 [____________]   형식 [전체▼]   유형 [전체▼]" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="150" width="430" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="docs" value="제목 | 작성 형식 | 문서 유형 | 수정일&lt;br&gt;&lt;br&gt;신규 인수인계서 | DOCS | 인수인계서 | 09-23&lt;br&gt;9월 업무 목록 | SHEETS | 업무 목록 | 09-22&lt;br&gt;주간 보고 | DOCS | 업무보고서 | 09-20" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="1000" y="230" width="430" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="actions" value="[ 상세 ]   [ 수정 ]   [ 삭제 ]" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="1090" y="445" width="250" height="38" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="02 형식·템플릿선택" id="O8rMIJZOMW5w8_muZVwh">
+    <mxGraphModel dx="909" dy="616" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="AutoDoc 화면설계 02 · 작성 형식 및 템플릿 선택" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry x="35" y="20" width="1200" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="mode" value="" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="70" y="100" width="600" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="mh" value="04 작성 형식 선택" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" parent="1" vertex="1">
+          <mxGeometry x="70" y="100" width="600" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="mnote" value="새 문서를 작성할 형식을 먼저 선택합니다." style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="110" y="170" width="520" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="docs" value="DOCS형&lt;br&gt;&lt;br&gt;인수인계서·업무보고서 등&lt;br&gt;서술형 업무 문서&lt;br&gt;&lt;br&gt;출력: DOCX" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="120" y="250" width="220" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="sheets" value="SHEETS형&lt;br&gt;&lt;br&gt;업무 목록·체크리스트 등&lt;br&gt;행·열 기반 업무 데이터&lt;br&gt;&lt;br&gt;출력: XLSX" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="400" y="250" width="220" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="next1" value="다음 →" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="475" y="610" width="150" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="tpl" value="" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry x="760" y="100" width="650" height="600" as="geometry" />
+        </mxCell>
+        <mxCell id="th" value="05 템플릿 선택" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" parent="1" vertex="1">
+          <mxGeometry x="760" y="100" width="650" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="selected" value="선택 형식: DOCS형" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="790" y="165" width="590" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="tabs" value="[ 기본 템플릿 ]      [ 내 템플릿 ]" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" parent="1" vertex="1">
+          <mxGeometry x="810" y="230" width="550" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cards" value="인수인계서&lt;br&gt;제목 / 본문 / 중요 사항 / 주의 사항&lt;br&gt;템플릿 디자인 자동 적용&lt;br&gt;&lt;br&gt;[ 선택 ]" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="820" y="300" width="250" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="cards2" value="업무보고서&lt;br&gt;지원 문서 유형 확장 시 추가&lt;br&gt;&lt;br&gt;&lt;br&gt;[ 선택 ]" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="300" width="250" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="rule" value="작성 형식에 맞는 템플릿만 표시합니다.&lt;br&gt;템플릿 선택 시 구조와 디자인이 함께 적용됩니다." style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" parent="1" vertex="1">
+          <mxGeometry x="820" y="550" width="540" height="70" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="03 DOCS작성" id="h_NVFyWV29XJ69ksnyR7">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 03 · DOCS형 작성 및 결과 확인" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edit" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="680" width="780" x="50" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="eh" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="06-A DOCS형 웹 작성" vertex="1">
+          <mxGeometry height="42" width="780" x="50" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="toolbar" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="인수인계서 · 기본 템플릿 적용     [ 저장 ]   [ 미리보기 ]" vertex="1">
+          <mxGeometry height="45" width="730" x="75" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="titlef" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="문서 제목  [____________________________________________]" vertex="1">
+          <mxGeometry height="45" width="690" x="95" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="body" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" value="본문&lt;br&gt;&lt;br&gt;업무 내용을 입력합니다." vertex="1">
+          <mxGeometry height="180" width="690" x="95" y="285" as="geometry" />
+        </mxCell>
+        <mxCell id="important" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="중요 사항&lt;br&gt;&lt;br&gt;중요하게 전달할 내용을 입력합니다." vertex="1">
+          <mxGeometry height="125" width="330" x="95" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="caution" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="주의 사항&lt;br&gt;&lt;br&gt;주의가 필요한 내용을 입력합니다." vertex="1">
+          <mxGeometry height="125" width="330" x="455" y="485" as="geometry" />
+        </mxCell>
+        <mxCell id="attach" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="첨부파일   [ 파일 선택 ]" vertex="1">
+          <mxGeometry height="42" width="690" x="95" y="635" as="geometry" />
+        </mxCell>
+        <mxCell id="docnote" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="표 작성 / 글꼴 / 글자 크기 / 줄 간격 / 정렬 직접 편집 기능은 제공하지 않음" vertex="1">
+          <mxGeometry height="40" width="690" x="95" y="695" as="geometry" />
+        </mxCell>
+        <mxCell id="preview" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="680" width="550" x="880" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ph" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="07-A DOCS 미리보기 · 다운로드" vertex="1">
+          <mxGeometry height="42" width="550" x="880" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pnote" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="선택한 템플릿의 문서 구조와 디자인을 자동 적용한 결과" vertex="1">
+          <mxGeometry height="45" width="490" x="910" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="paper" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" value="인수인계서&lt;br&gt;&lt;br&gt;&lt;b&gt;본문&lt;/b&gt;&lt;br&gt;작성한 업무 내용이 템플릿 양식으로 표시됩니다.&lt;br&gt;&lt;br&gt;&lt;b&gt;중요 사항&lt;/b&gt;&lt;br&gt;중요 내용 표시&lt;br&gt;&lt;br&gt;&lt;b&gt;주의 사항&lt;/b&gt;&lt;br&gt;주의 내용 표시" vertex="1">
+          <mxGeometry height="360" width="410" x="950" y="225" as="geometry" />
+        </mxCell>
+        <mxCell id="back" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="← 작성 화면" vertex="1">
+          <mxGeometry height="42" width="160" x="950" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="download" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="DOCX 다운로드" vertex="1">
+          <mxGeometry height="42" width="180" x="1180" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="sharebtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="공유" vertex="1">
+          <mxGeometry height="42" width="100" x="950" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="versionbtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="버전" vertex="1">
+          <mxGeometry height="42" width="100" x="1060" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="drivebtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="Drive 저장" vertex="1">
+          <mxGeometry height="42" width="100" x="1170" y="690" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="04 SHEETS작성" id="9l2DgZprMb0H35rd9p42">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 04 · SHEETS형 작성 및 결과 확인" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edit" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="680" width="800" x="50" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="eh" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="06-B SHEETS형 웹 작성" vertex="1">
+          <mxGeometry height="42" width="800" x="50" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="toolbar" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="업무 목록 · 기본 템플릿 적용     [ 저장 ]   [ 미리보기 ]" vertex="1">
+          <mxGeometry height="45" width="750" x="75" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="sheettitle" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="문서 제목  [____________________________________________]" vertex="1">
+          <mxGeometry height="45" width="710" x="95" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="grid" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" value="번호 | 업무 항목 | 담당자 | 상태 | 일정 | 비고&lt;br&gt;&lt;br&gt;1 | 요구사항 검토 | 홍길동 | 진행중 | 09-23 | -&lt;br&gt;2 | 화면설계 수정 | 홍길동 | 예정 | 09-24 | -&lt;br&gt;3 | ERD 검토 | 홍길동 | 예정 | 09-25 | -" vertex="1">
+          <mxGeometry height="230" width="710" x="95" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="rows" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ ＋ 행 추가 ]   [ 행 수정 ]   [ 행 삭제 ]" vertex="1">
+          <mxGeometry height="40" width="360" x="95" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="snote" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="행·열 기반 데이터 입력 지원&lt;br&gt;셀 수식 / 매크로 / 복잡한 차트 / 셀별 디자인 편집은 제공하지 않음" vertex="1">
+          <mxGeometry height="70" width="710" x="95" y="655" as="geometry" />
+        </mxCell>
+        <mxCell id="preview" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="680" width="530" x="900" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ph" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="07-B SHEETS 미리보기 · 다운로드" vertex="1">
+          <mxGeometry height="42" width="530" x="900" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="pnote" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="템플릿에 정의된 헤더·정렬·열 너비 등의 양식을 자동 적용" vertex="1">
+          <mxGeometry height="55" width="470" x="930" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="sheetprev" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" value="업무 목록&lt;br&gt;&lt;br&gt;번호 | 업무 항목 | 담당자 | 상태&lt;br&gt;1 | 요구사항 검토 | 홍길동 | 진행중&lt;br&gt;2 | 화면설계 수정 | 홍길동 | 예정&lt;br&gt;3 | ERD 검토 | 홍길동 | 예정" vertex="1">
+          <mxGeometry height="270" width="450" x="940" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="back" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="← 작성 화면" vertex="1">
+          <mxGeometry height="42" width="150" x="950" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="download" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="XLSX 다운로드" vertex="1">
+          <mxGeometry height="42" width="180" x="1180" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="columns" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ ＋ 열 추가 ]   [ 열 수정 ]   [ 열 삭제 ]   [ ← 열 이동 ]   [ 열 이동 → ]" vertex="1">
+          <mxGeometry height="40" width="560" x="95" y="595" as="geometry" />
+        </mxCell>
+        <mxCell id="sharebtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="공유" vertex="1">
+          <mxGeometry height="42" width="100" x="950" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="versionbtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="버전" vertex="1">
+          <mxGeometry height="42" width="100" x="1060" y="690" as="geometry" />
+        </mxCell>
+        <mxCell id="drivebtn" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="Drive 저장" vertex="1">
+          <mxGeometry height="42" width="100" x="1170" y="690" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="05 템플릿관리" id="joQK0IduwWLe70iwTz4Y">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 05 · 사용자 템플릿 업로드 및 관리" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="upload" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="610" width="640" x="60" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uh" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="08 사용자 템플릿 업로드" vertex="1">
+          <mxGeometry height="42" width="640" x="60" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="uname" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="템플릿명  [________________________________]" vertex="1">
+          <mxGeometry height="45" width="560" x="100" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="utype" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="작성 형식  [ DOCS형 ▼ ]" vertex="1">
+          <mxGeometry height="45" width="560" x="100" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="ufile" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="양식 파일  [ 파일 선택 ]&lt;br&gt;지원: DOCX / XLSX" vertex="1">
+          <mxGeometry height="75" width="560" x="100" y="315" as="geometry" />
+        </mxCell>
+        <mxCell id="analysis" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="업로드 후 처리&lt;br&gt;· 지원 범위 내 문서 구조 분석&lt;br&gt;· 디자인 양식 분석&lt;br&gt;· 작성 형식과 파일 확장자 검증&lt;br&gt;· 사용자 템플릿으로 저장" vertex="1">
+          <mxGeometry height="150" width="560" x="100" y="430" as="geometry" />
+        </mxCell>
+        <mxCell id="cancel" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="취소" vertex="1">
+          <mxGeometry height="42" width="120" x="300" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="reg" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="템플릿 등록" vertex="1">
+          <mxGeometry height="42" width="160" x="450" y="625" as="geometry" />
+        </mxCell>
+        <mxCell id="manage" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="610" width="670" x="760" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="mh" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="09 사용자 템플릿 관리" vertex="1">
+          <mxGeometry height="42" width="670" x="760" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="filter" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="형식 [전체▼]    템플릿명 검색 [________________]" vertex="1">
+          <mxGeometry height="45" width="590" x="800" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="list" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=8;fontSize=11;" value="템플릿명 | 형식 | 원본 파일 | 등록일&lt;br&gt;&lt;br&gt;사내 인수인계 양식 | DOCS | handover.docx | 09-23&lt;br&gt;업무 체크리스트 | SHEETS | checklist.xlsx | 09-22" vertex="1">
+          <mxGeometry height="190" width="590" x="800" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="actions" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ 상세 ]   [ 수정 ]   [ 삭제 ]   [ 새 문서에 사용 ]" vertex="1">
+          <mxGeometry height="42" width="470" x="860" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="tnote" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="사용자 템플릿은 작성 중인 문서를 저장해서 만드는 방식이 아니라&lt;br&gt;DOCX/XLSX 양식 파일 업로드로 추가합니다." vertex="1">
+          <mxGeometry height="75" width="590" x="800" y="555" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="06 공유·버전·Drive" id="-ESqk3zcOJYh--HT2zbT">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 06 · 문서 공유 · 버전 · Drive" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="h0" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="10 문서 공유" vertex="1">
+          <mxGeometry height="42" width="470" x="55" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b0" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="문서: 신규 인수인계서&lt;br&gt;&lt;br&gt;공유 대상 사용자  [ 사용자 검색 __________ ]&lt;br&gt;&lt;br&gt;권한  [ VIEWER ▼ ]&lt;br&gt;&lt;br&gt;만료일  [ 선택 사항 ]&lt;br&gt;&lt;br&gt;공유 사용자 목록&lt;br&gt;김개발 | VIEWER | 2026-12-31" vertex="1">
+          <mxGeometry height="300" width="420" x="80" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ 공유 ]   [ 권한 수정 ]   [ 공유 해제 ]" vertex="1">
+          <mxGeometry height="44" width="380" x="100" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="n0" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=12;" value="AutoDoc 가입 사용자에게 공유하며 VIEWER / EDITOR 권한을 사용합니다." vertex="1">
+          <mxGeometry height="90" width="420" x="80" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="11 버전 관리" vertex="1">
+          <mxGeometry height="42" width="470" x="570" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="문서: 신규 인수인계서&lt;br&gt;&lt;br&gt;버전 | 생성자 | 생성일시&lt;br&gt;&lt;br&gt;v3 | 홍길동 | 09-29 14:00&lt;br&gt;v2 | 홍길동 | 09-28 17:20&lt;br&gt;v1 | 홍길동 | 09-27 11:10" vertex="1">
+          <mxGeometry height="300" width="420" x="595" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ 현재 버전 저장 ]   [ 버전 상세 ]" vertex="1">
+          <mxGeometry height="44" width="380" x="615" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=12;" value="문서 변경 시 필요한 시점의 내용을 버전으로 저장하고 이전 내용을 조회합니다." vertex="1">
+          <mxGeometry height="90" width="420" x="595" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="h2" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="12 Google Drive 연동" vertex="1">
+          <mxGeometry height="42" width="470" x="1085" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="문서: 신규 인수인계서&lt;br&gt;&lt;br&gt;연동 상태  미연동&lt;br&gt;&lt;br&gt;Drive 파일  -&lt;br&gt;&lt;br&gt;마지막 동기화  -&lt;br&gt;&lt;br&gt;연동 후 생성된 DOCX/XLSX 파일을 Drive와 연결" vertex="1">
+          <mxGeometry height="300" width="420" x="1110" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ Drive 연동 ]   [ 동기화 ]   [ 연동 해제 ]" vertex="1">
+          <mxGeometry height="44" width="380" x="1130" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="n2" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=12;" value="Google Drive는 선택 기능입니다. 사용하지 않는 문서는 Drive 연동 정보가 생성되지 않습니다." vertex="1">
+          <mxGeometry height="90" width="420" x="1110" y="565" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="07 사용자·팀관리" id="9Yw_KNl9S_bd6O9RO0FW">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 07 · 사용자 및 팀 관리" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="h0" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="13 사용자 관리" vertex="1">
+          <mxGeometry height="42" width="650" x="55" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b0" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="사용자 검색 [________________]   팀 [전체▼]   상태 [전체▼]&lt;br&gt;&lt;br&gt;이름 | 이메일 | 소속 팀 | 권한 | 상태&lt;br&gt;&lt;br&gt;홍길동 | hong@autodoc.com | 개발팀 | USER | ACTIVE&lt;br&gt;김개인 | kim@autodoc.com | - | USER | ACTIVE&lt;br&gt;이관리 | lee@autodoc.com | 개발팀 | MANAGER | ACTIVE" vertex="1">
+          <mxGeometry height="300" width="600" x="80" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="a0" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ 팀 변경/해제 ]   [ 권한 변경 ]   [ 상태 변경 ]" vertex="1">
+          <mxGeometry height="44" width="560" x="100" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="n0" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=12;" value="개인 사용자는 소속 팀이 없을 수 있습니다. 팀 소속은 선택 사항으로 처리합니다." vertex="1">
+          <mxGeometry height="90" width="600" x="80" y="565" as="geometry" />
+        </mxCell>
+        <mxCell id="h1" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#666666;fontStyle=1;fontSize=15;align=left;spacingLeft=10;" value="14 팀 관리" vertex="1">
+          <mxGeometry height="42" width="650" x="750" y="95" as="geometry" />
+        </mxCell>
+        <mxCell id="b1" parent="1" style="rounded=0;html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#A6A6A6;align=left;spacingLeft=10;fontSize=12;" value="팀 검색 [________________]&lt;br&gt;&lt;br&gt;팀명 | 설명 | 사용자 수&lt;br&gt;&lt;br&gt;개발팀 | 서비스 개발 | 6&lt;br&gt;기획팀 | 서비스 기획 | 4&lt;br&gt;운영팀 | 서비스 운영 | 3" vertex="1">
+          <mxGeometry height="300" width="600" x="775" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#EAF2F8;strokeColor=#5B9BD5;fontStyle=1;fontSize=12;" value="[ ＋ 팀 등록 ]   [ 팀 수정 ]   [ 팀 삭제 ]" vertex="1">
+          <mxGeometry height="44" width="560" x="795" y="495" as="geometry" />
+        </mxCell>
+        <mxCell id="n1" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=12;" value="PC 웹에서는 표 형태로 관리하고, 좁은 화면에서는 표 영역에 가로 스크롤을 적용합니다." vertex="1">
+          <mxGeometry height="90" width="600" x="775" y="565" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="08 전체흐름" id="Kp0PLgAw1P5lql9stxE3">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1500" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=25;fontStyle=1;align=left;verticalAlign=middle;" value="AutoDoc 화면설계 08 · 전체 사용자 흐름" vertex="1">
+          <mxGeometry height="42" width="1200" x="35" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="로그인" vertex="1">
+          <mxGeometry height="70" width="145" x="70" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="대시보드" vertex="1">
+          <mxGeometry height="70" width="145" x="240" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="새 문서 작성" vertex="1">
+          <mxGeometry height="70" width="145" x="410" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="DOCS / SHEETS 선택" vertex="1">
+          <mxGeometry height="70" width="145" x="600" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f5" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="템플릿 선택" vertex="1">
+          <mxGeometry height="70" width="145" x="810" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f6" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="DOCS / SHEETS&lt;br&gt;내용 작성" vertex="1">
+          <mxGeometry height="70" width="145" x="1000" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f7" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="미리보기" vertex="1">
+          <mxGeometry height="70" width="145" x="1170" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="f8" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="DOCX / XLSX&lt;br&gt;다운로드" vertex="1">
+          <mxGeometry height="70" width="155" x="1330" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="f1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="f2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="f3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="f4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="f5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="f6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="f7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="branch" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="사용자 템플릿 관리" vertex="1">
+          <mxGeometry height="65" width="250" x="560" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="upload" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#F5F5F5;strokeColor=#666666;fontStyle=1;fontSize=13;" value="DOCX / XLSX 양식 업로드" vertex="1">
+          <mxGeometry height="65" width="230" x="250" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="eup" edge="1" parent="1" source="upload" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="branch" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="etpl" edge="1" parent="1" source="branch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;" target="f5" value="재사용">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rules" parent="1" style="rounded=1;html=1;whiteSpace=wrap;fillColor=#FFF2CC;strokeColor=#D6B656;align=left;spacing=8;fontSize=11;" value="설계 기준&lt;br&gt;&lt;br&gt;• PC 웹을 기본으로 하고 태블릿·모바일까지 반응형 지원&lt;br&gt;• DOCS: 제목 / 본문 / 중요 사항 / 주의 사항, 표 작성 제외&lt;br&gt;• SHEETS: 행·열 기반 데이터 입력 + 행/열 추가·수정·삭제, 열 순서 변경&lt;br&gt;• 디자인: 사용자가 직접 편집하지 않고 선택한 템플릿 양식 자동 적용&lt;br&gt;• 문서 부가기능: 공유 / 버전 / Google Drive 연동&lt;br&gt;• 사용자: 개인 사용 가능, 팀 소속은 선택 사항&lt;br&gt;• 출력: DOCS → DOCX, SHEETS → XLSX" vertex="1">
+          <mxGeometry height="170" width="700" x="420" y="560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
