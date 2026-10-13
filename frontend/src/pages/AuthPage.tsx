@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authApi } from '../api/auth-api';
 import { userApi } from '../api/user-api';
 import { getApiError } from '../api/client';
-import type { User } from '../api/types';
+import { getLoginDestination } from '../router/auth-routing';
 
 const focusClassName = 'focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-blue-300';
 const fieldLabelClassName = 'flex flex-col gap-2 text-sm font-semibold';
@@ -21,7 +21,7 @@ const hintClassName = '-mt-2.5 text-xs leading-[1.6] text-slate-500';
 export function AuthPage({ signup = false }: { signup?: boolean }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, setUser] = useState<User | null>(null);
+  const destination = getLoginDestination(location.search);
   const [checking, setChecking] = useState(true);
   const [pending, setPending] = useState(false);
   const [hasTeam, setHasTeam] = useState(false);
@@ -33,19 +33,19 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
   const recoveryDialog = useRef<HTMLDialogElement>(null);
   const submitting = useRef(false);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState(location.state?.signupComplete ? '회원가입이 완료되었습니다. 이메일과 비밀번호로 로그인해 주세요.' : '');
+  const [notice, setNotice] = useState(location.state?.signupComplete ? '회원가입이 완료되었습니다. 이메일과 비밀번호로 로그인해 주세요.' : location.state?.loggedOut ? '로그아웃되었습니다.' : '');
 
   useEffect(() => {
     let active = true;
     authApi.getCurrentUser().then((currentUser) => {
-      if (active) setUser(currentUser);
+      if (active && currentUser.status === 'ACTIVE') navigate(destination, { replace: true });
     }).catch((failure: unknown) => {
       if (active && getApiError(failure)?.code !== 'UNAUTHORIZED') {
         setError('로그인 상태를 확인하지 못했습니다. 서버 연결을 확인해 주세요.');
       }
     }).finally(() => { if (active) setChecking(false); });
     return () => { active = false; };
-  }, []);
+  }, [navigate, destination]);
 
   useEffect(() => {
     if (!signup || !hasTeam || teamMode !== 'existing') return;
@@ -107,29 +107,12 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
         form.reset();
         navigate('/login', { replace: true, state: { signupComplete: true } });
       } else {
-        setUser(await authApi.login({ email, password, rememberMe: data.get('rememberMe') === 'on' }));
+        await authApi.login({ email, password, rememberMe: data.get('rememberMe') === 'on' });
         form.reset();
+        navigate(destination, { replace: true });
       }
     } catch (failure: unknown) {
       setError(getApiError(failure)?.message ?? '서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요.');
-    } finally {
-      submitting.current = false;
-      setPending(false);
-    }
-  }
-
-  async function logout() {
-    if (submitting.current) return;
-    submitting.current = true;
-    setPending(true);
-    setError('');
-    try {
-      await authApi.logout();
-      setUser(null);
-      setNotice('로그아웃되었습니다.');
-      navigate('/login', { replace: true });
-    } catch (failure: unknown) {
-      setError(getApiError(failure)?.message ?? '로그아웃하지 못했습니다. 다시 시도해 주세요.');
     } finally {
       submitting.current = false;
       setPending(false);
@@ -140,17 +123,11 @@ export function AuthPage({ signup = false }: { signup?: boolean }) {
     <main className="grid min-h-dvh place-items-center px-5 py-10 max-[440px]:px-4 max-[440px]:py-6">
       <section className="w-full max-w-[400px] rounded-xl border border-[#e0e5ec] bg-white px-11 py-10 shadow-[0_8px_30px_#172b4d08] max-[440px]:px-6 max-[440px]:py-8" aria-labelledby="auth-title">
         <div className="mb-[26px] text-center text-[30px] font-[750] tracking-[-1px]">AutoDoc</div>
-        <h1 className="mb-2.5 text-center text-xl font-bold" id="auth-title">{user ? '로그인 완료' : signup ? '회원가입' : '로그인'}</h1>
-        <p className={descriptionClassName}>{user ? `${user.name}님, 환영합니다.` : signup ? 'AutoDoc 계정을 만들어 주세요.' : '계정으로 로그인해 주세요.'}</p>
+        <h1 className="mb-2.5 text-center text-xl font-bold" id="auth-title">{signup ? '회원가입' : '로그인'}</h1>
+        <p className={descriptionClassName}>{signup ? 'AutoDoc 계정을 만들어 주세요.' : '계정으로 로그인해 주세요.'}</p>
         {error && <p className={errorClassName} role="alert">{error}</p>}
         {notice && <p className={successClassName} role="status">{notice}</p>}
-        {checking ? <p role="status">로그인 상태를 확인하고 있습니다.</p> : user ? (
-          <div className="flex flex-col gap-[18px]">
-            <p className="text-center [overflow-wrap:anywhere]">{user.email}</p>
-            <p className={descriptionClassName}>문서 관리 화면은 추후 제공됩니다.</p>
-            <button type="button" className={primaryClassName} onClick={logout} disabled={pending}>{pending ? '로그아웃 중…' : '로그아웃'}</button>
-          </div>
-        ) : (
+        {checking ? <p role="status">로그인 상태를 확인하고 있습니다.</p> : (
           <form className="flex flex-col gap-[18px]" onSubmit={submit} aria-busy={pending}>
             <fieldset className={fieldsetClassName} disabled={pending}>
               {signup && <label className={fieldLabelClassName} htmlFor="name">이름<input className={fieldClassName} id="name" name="name" autoComplete="name" placeholder="이름" required maxLength={100} /></label>}
