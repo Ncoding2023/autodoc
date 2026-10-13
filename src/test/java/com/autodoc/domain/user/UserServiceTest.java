@@ -41,7 +41,7 @@ class UserServiceTest {
     @DisplayName("새 팀과 회원을 함께 생성하여 가입한다")
     void signsUpUserAndCreatesTeamTogether() {
         UserResponse response = userService.signUp(new UserCreateRequest(null,
-                "signup-new-team@example.test", "password1234", "새 팀 사용자",
+                "signup-new-team@example.test", "password1234!", "새 팀 사용자",
                 new TeamCreateRequest("회원가입 신규 팀", "팀 소개")));
 
         Team team = teamRepository.findById(response.teamId()).orElseThrow();
@@ -71,7 +71,7 @@ class UserServiceTest {
         teamRepository.saveAndFlush(new Team("회원가입 중복 팀", null));
         assertBusinessException(ErrorCode.DUPLICATE_TEAM_NAME,
                 () -> userService.signUp(new UserCreateRequest(null,
-                        "signup-duplicate-team@example.test", "password1234", "팀 사용자",
+                        "signup-duplicate-team@example.test", "password1234!", "팀 사용자",
                         new TeamCreateRequest("회원가입 중복 팀", null))));
         assertThat(userRepository.existsByEmail("signup-duplicate-team@example.test")).isFalse();
         log.info("회원가입 신규 팀 이름 중복 검증 완료");
@@ -81,7 +81,7 @@ class UserServiceTest {
     @DisplayName("기존 팀 선택과 새 팀 등록을 동시에 요청할 수 없다")
     void rejectsExistingAndNewTeamTogether() {
         UserCreateRequest request = new UserCreateRequest(1L, "signup-both@example.test",
-                "password1234", "팀 사용자", new TeamCreateRequest("신규 팀", null));
+                "password1234!", "팀 사용자", new TeamCreateRequest("신규 팀", null));
         assertThat(validator.validate(request)).isNotEmpty();
         assertBusinessException(ErrorCode.INVALID_REQUEST, () -> userService.signUp(request));
         log.info("기존 팀 선택과 새 팀 등록 동시 요청 거부 검증 완료");
@@ -91,7 +91,7 @@ class UserServiceTest {
     @DisplayName("새 팀 이름의 공백과 설명의 최대 길이를 검증한다")
     void validatesNewTeamInput() {
         UserCreateRequest request = new UserCreateRequest(null, "signup-validation@example.test",
-                "password1234", "팀 사용자", new TeamCreateRequest(" ", "x".repeat(256)));
+                "password1234!", "팀 사용자", new TeamCreateRequest(" ", "x".repeat(256)));
         assertThat(validator.validate(request)).extracting(violation -> violation.getPropertyPath().toString())
                 .contains("team.name", "team.description");
         log.info("회원가입 신규 팀 입력값 검증 완료");
@@ -111,12 +111,12 @@ class UserServiceTest {
     @Test
     @DisplayName("개인 회원가입 시 비밀번호를 암호화하고 기본 권한과 상태를 설정한다")
     void signsUpUserWithEncodedPassword() {
-        UserResponse response = userService.signUp(new UserCreateRequest(null, "service-signup@example.test", "password1234", "회원가입 사용자"));
+        UserResponse response = userService.signUp(new UserCreateRequest(null, "service-signup@example.test", "password1234!", "회원가입 사용자"));
 
         User saved = userRepository.findById(response.id()).orElseThrow();
         assertThat(response.role()).isEqualTo(UserRole.USER);
         assertThat(response.status()).isEqualTo(UserStatus.ACTIVE);
-        assertThat(passwordEncoder.matches("password1234", saved.getPassword())).isTrue();
+        assertThat(passwordEncoder.matches("password1234!", saved.getPassword())).isTrue();
         log.info("회원가입 서비스 검증 완료: userId={}", response.id());
     }
 
@@ -125,7 +125,7 @@ class UserServiceTest {
     void signsUpUserWithTeam() {
         Team team = teamRepository.saveAndFlush(new Team("service-signup-team", "회원가입 테스트 팀"));
 
-        UserResponse response = userService.signUp(new UserCreateRequest(team.getId(), "service-team-user@example.test", "password1234", "팀 소속 사용자"));
+        UserResponse response = userService.signUp(new UserCreateRequest(team.getId(), "service-team-user@example.test", "password1234!", "팀 소속 사용자"));
 
         assertThat(response.teamId()).isEqualTo(team.getId());
         log.info("팀 소속 회원가입 서비스 검증 완료: userId={}, teamId={}", response.id(), team.getId());
@@ -137,7 +137,7 @@ class UserServiceTest {
         userRepository.saveAndFlush(new User(null, "service-duplicate@example.test", "encoded-password", "기존 사용자", UserRole.USER, UserStatus.ACTIVE));
 
         assertBusinessException(ErrorCode.DUPLICATE_EMAIL,
-                () -> userService.signUp(new UserCreateRequest(null, "service-duplicate@example.test", "password1234", "중복 사용자")));
+                () -> userService.signUp(new UserCreateRequest(null, "service-duplicate@example.test", "password1234!", "중복 사용자")));
         log.info("회원가입 이메일 중복 검증 완료");
     }
 
@@ -145,7 +145,7 @@ class UserServiceTest {
     @DisplayName("존재하지 않는 팀으로 회원가입할 수 없다")
     void rejectsUnknownTeamOnSignUp() {
         assertBusinessException(ErrorCode.TEAM_NOT_FOUND,
-                () -> userService.signUp(new UserCreateRequest(999999L, "service-unknown-team@example.test", "password1234", "팀 오류 사용자")));
+                () -> userService.signUp(new UserCreateRequest(999999L, "service-unknown-team@example.test", "password1234!", "팀 오류 사용자")));
         log.info("회원가입 소속 팀 존재 여부 검증 완료");
     }
 

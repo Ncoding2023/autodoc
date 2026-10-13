@@ -29,6 +29,7 @@ VITE_API_BASE_URL=/api
 
 - `src/router`: 화면 URL 라우트 정의. 기본 진입 URL은 `/login`이다.
 - `src/pages`: 로그인 및 회원가입 화면.
+- 화면 스타일은 Tailwind CSS 4 유틸리티 클래스로 작성한다. `src/styles.css`에는 Tailwind 가져오기, 기본 글꼴과 페이지 전역 설정만 둔다.
 - `src/api`: Axios 공통 인스턴스와 도메인별 API 호출 함수.
 - `withCredentials: true`: HttpSession 쿠키를 요청에 포함한다.
 
