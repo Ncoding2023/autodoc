@@ -14,6 +14,7 @@ import com.autodoc.domain.template.DocumentTemplateRepository;
 import com.autodoc.domain.template.TemplateScope;
 import com.autodoc.domain.template.WritingFormat;
 import tools.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
 @ActiveProfiles("local")
 @Transactional
+@DisplayName("SHEETS 서비스")
 class SheetServiceTest {
     private static final Logger log = LoggerFactory.getLogger(SheetServiceTest.class);
 
@@ -38,7 +40,9 @@ class SheetServiceTest {
     @Autowired private DocumentTemplateRepository templateRepository;
     @Autowired private ObjectMapper objectMapper;
 
-    @Test void addsColumn() {
+    @Test
+    @DisplayName("SHEETS 열 추가 시 열 키와 순서를 설정한다")
+    void addsColumn() {
         Document document = sheetsDocument("열 추가");
 
         var response = sheetService.addColumn(document.getId(), 1L, column("task", "업무"));
@@ -48,7 +52,9 @@ class SheetServiceTest {
         log.info("SHEETS 열 추가 서비스 검증 완료: columnId={}", response.id());
     }
 
-    @Test void  getsColumnsInOrder() {
+    @Test
+    @DisplayName("SHEETS 열을 지정된 순서대로 조회한다")
+    void getsColumnsInOrder() {
         Document document = sheetsDocument("열 목록");
         sheetService.addColumn(document.getId(), 1L, column("task", "업무"));
         sheetService.addColumn(document.getId(), 1L, column("owner", "담당자"));
@@ -59,7 +65,9 @@ class SheetServiceTest {
         log.info("SHEETS 열 목록 조회 서비스 검증 완료: documentId={}", document.getId());
     }
 
-    @Test void updatesColumn() {
+    @Test
+    @DisplayName("SHEETS 열 이름을 수정한다")
+    void updatesColumn() {
         Document document = sheetsDocument("열 수정");
         Long columnId = sheetService.addColumn(document.getId(), 1L, column("task", "업무")).id();
 
@@ -70,7 +78,9 @@ class SheetServiceTest {
         log.info("SHEETS 열 수정 서비스 검증 완료: columnId={}", columnId);
     }
 
-    @Test void changesColumnOrder() {
+    @Test
+    @DisplayName("SHEETS 열 순서를 변경한다")
+    void changesColumnOrder() {
         Document document = sheetsDocument("열 순서 변경");
         Long firstId = sheetService.addColumn(document.getId(), 1L, column("task", "업무")).id();
         Long secondId = sheetService.addColumn(document.getId(), 1L, column("owner", "담당자")).id();
@@ -82,7 +92,9 @@ class SheetServiceTest {
         log.info("SHEETS 열 순서 변경 서비스 검증 완료: documentId={}", document.getId());
     }
 
-    @Test void deletesColumnAndRemovesItsRowData() throws Exception {
+    @Test
+    @DisplayName("SHEETS 열 삭제 시 해당 열의 행 데이터만 제거한다")
+    void deletesColumnAndRemovesItsRowData() throws Exception {
         Document document = sheetsDocument("열 삭제");
         Long columnId = sheetService.addColumn(document.getId(), 1L, column("task", "업무")).id();
         sheetService.addRow(document.getId(), 1L, new SheetRowRequest(objectMapper.readTree("{\"task\":\"테스트\",\"owner\":\"관리자\"}")));
@@ -95,7 +107,9 @@ class SheetServiceTest {
         log.info("SHEETS 열 삭제 및 행 데이터 정리 서비스 검증 완료: columnId={}", columnId);
     }
 
-    @Test void addsRow() throws Exception {
+    @Test
+    @DisplayName("SHEETS 행 추가 시 행 번호를 설정한다")
+    void addsRow() throws Exception {
         Document document = sheetsDocument("행 추가");
 
         var response = sheetService.addRow(document.getId(), 1L,
@@ -105,7 +119,9 @@ class SheetServiceTest {
         log.info("SHEETS 행 추가 서비스 검증 완료: rowId={}", response.id());
     }
 
-    @Test void updatesRow() throws Exception {
+    @Test
+    @DisplayName("SHEETS 행 데이터를 수정한다")
+    void updatesRow() throws Exception {
         Document document = sheetsDocument("행 수정");
         Long rowId = sheetService.addRow(document.getId(), 1L,
                 new SheetRowRequest(objectMapper.readTree("{\"task\":\"수정 전\"}"))).id();
@@ -117,7 +133,9 @@ class SheetServiceTest {
         log.info("SHEETS 행 수정 서비스 검증 완료: rowId={}", rowId);
     }
 
-    @Test void deletesRow() throws Exception {
+    @Test
+    @DisplayName("SHEETS 행을 삭제한다")
+    void deletesRow() throws Exception {
         Document document = sheetsDocument("행 삭제");
         Long rowId = sheetService.addRow(document.getId(), 1L,
                 new SheetRowRequest(objectMapper.readTree("{\"task\":\"삭제 대상\"}"))).id();
@@ -128,7 +146,9 @@ class SheetServiceTest {
         log.info("SHEETS 행 삭제 서비스 검증 완료: rowId={}", rowId);
     }
 
-    @Test void rejectsDocsDocument() {
+    @Test
+    @DisplayName("DOCS 문서에서는 SHEETS 기능을 사용할 수 없다")
+    void rejectsDocsDocument() {
         Document document = documentRepository.saveAndFlush(new Document(1L, template("DOCS", WritingFormat.DOCS).getId(),
                 "DOCS 문서", WritingFormat.DOCS, "report", null, null, null));
 

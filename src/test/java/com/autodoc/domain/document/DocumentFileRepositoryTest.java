@@ -1,6 +1,7 @@
 package com.autodoc.domain.document;
 
 import com.autodoc.support.LocalPostgreSqlRepositoryTestSupport;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,23 +11,30 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {"spring.jpa.hibernate.ddl-auto=validate", "spring.test.database.replace=none"})
+@DisplayName("문서 파일 저장소")
 class DocumentFileRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
     private static final Logger log = LoggerFactory.getLogger(DocumentFileRepositoryTest.class);
     @Autowired private DocumentFileRepository documentFileRepository;
 
-    @Test void createsDocumentFile() {
+    @Test
+    @DisplayName("문서 파일을 저장한다")
+    void createsDocumentFile() {
         DocumentFile saved = documentFileRepository.saveAndFlush(file("create.txt", "create-stored"));
         assertThat(saved.getId()).isNotNull();
         log.info("문서 파일 생성 완료: id={}", saved.getId());
     }
 
-    @Test void readsDocumentFile() {
+    @Test
+    @DisplayName("문서 파일을 조회한다")
+    void readsDocumentFile() {
         DocumentFile saved = documentFileRepository.saveAndFlush(file("read.txt", "read-stored"));
         assertThat(documentFileRepository.findById(saved.getId())).get().extracting(DocumentFile::getOriginalName).isEqualTo("read.txt");
         log.info("문서 파일 조회 완료: id={}", saved.getId());
     }
 
-    @Test void updatesDocumentFile() {
+    @Test
+    @DisplayName("문서 파일 정보를 수정한다")
+    void updatesDocumentFile() {
         DocumentFile saved = documentFileRepository.saveAndFlush(file("before.txt", "update-stored"));
         documentFileRepository.findById(saved.getId()).orElseThrow().updateOriginalName("after.txt");
         documentFileRepository.flush();
@@ -34,7 +42,9 @@ class DocumentFileRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
         log.info("문서 파일 수정 완료: id={}", saved.getId());
     }
 
-    @Test void deletesDocumentFile() {
+    @Test
+    @DisplayName("문서 파일을 삭제한다")
+    void deletesDocumentFile() {
         DocumentFile saved = documentFileRepository.saveAndFlush(file("delete.txt", "delete-stored"));
         documentFileRepository.deleteById(saved.getId());
         documentFileRepository.flush();

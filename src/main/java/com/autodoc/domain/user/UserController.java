@@ -4,6 +4,8 @@ import com.autodoc.domain.auth.AuthService;
 import com.autodoc.domain.user.dto.UserCreateRequest;
 import com.autodoc.domain.user.dto.UserResponse;
 import com.autodoc.domain.user.dto.UserUpdateRequest;
+import com.autodoc.domain.user.dto.SignupTeamResponse;
+import java.util.List;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -31,6 +33,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> signUp(@Valid @RequestBody UserCreateRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(request));
+    }
+
+    @GetMapping("/signup-teams")
+    public List<SignupTeamResponse> getSignupTeams() {
+        return userService.getSignupTeams();
     }
 
     @GetMapping("/{userId}")

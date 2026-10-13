@@ -14,6 +14,7 @@ import com.autodoc.domain.template.DocumentTemplate;
 import com.autodoc.domain.template.DocumentTemplateRepository;
 import com.autodoc.domain.template.TemplateScope;
 import com.autodoc.domain.template.WritingFormat;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
 @ActiveProfiles("local")
 @Transactional
+@DisplayName("문서 서비스")
 class DocumentServiceTest {
     private static final Logger log = LoggerFactory.getLogger(DocumentServiceTest.class);
     @Autowired private DocumentService documentService;
@@ -37,14 +39,18 @@ class DocumentServiceTest {
     @Autowired private SheetColumnRepository sheetColumnRepository;
     @Autowired private SheetRowRepository sheetRowRepository;
 
-    @Test void createsDocument() {
+    @Test
+    @DisplayName("문서를 생성한다")
+    void createsDocument() {
         DocumentTemplate template = basicTemplate("document-create-template");
         DocumentResponse response = documentService.createDocument(1L, request(template.getId(), "문서 생성"));
         assertThat(response.id()).isNotNull();
         log.info("문서 생성 서비스 검증 완료: documentId={}", response.id());
     }
 
-    @Test void getsOnlyMyDocuments() {
+    @Test
+    @DisplayName("문서 목록에 본인 소유 문서만 포함한다")
+    void getsOnlyMyDocuments() {
         DocumentTemplate template = basicTemplate("document-list-template");
         documentRepository.saveAndFlush(new Document(1L, template.getId(), "내 문서", WritingFormat.DOCS, "report", null, null, null));
         documentRepository.saveAndFlush(new Document(2L, template.getId(), "다른 사용자 문서", WritingFormat.DOCS, "report", null, null, null));
@@ -52,21 +58,27 @@ class DocumentServiceTest {
         log.info("내 문서 목록 조회 서비스 검증 완료");
     }
 
-    @Test void updatesOwnDocument() {
+    @Test
+    @DisplayName("본인 소유 문서를 수정한다")
+    void updatesOwnDocument() {
         Document document = documentRepository.saveAndFlush(new Document(1L, basicTemplate("document-update-template").getId(), "수정 전", WritingFormat.DOCS, "report", null, null, null));
         DocumentResponse response = documentService.updateDocument(document.getId(), 1L, new DocumentUpdateRequest("수정 후", "handover", "본문", "중요", "주의"));
         assertThat(response.title()).isEqualTo("수정 후");
         log.info("문서 수정 서비스 검증 완료: documentId={}", document.getId());
     }
 
-    @Test void rejectsOtherUsersDocument() {
+    @Test
+    @DisplayName("다른 회원의 문서에 접근할 수 없다")
+    void rejectsOtherUsersDocument() {
         Document document = documentRepository.saveAndFlush(new Document(2L, basicTemplate("document-access-template").getId(), "다른 문서", WritingFormat.DOCS, "report", null, null, null));
         assertThatThrownBy(() -> documentService.getDocument(document.getId(), 1L)).isInstanceOfSatisfying(BusinessException.class,
                 exception -> assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED));
         log.info("타 사용자 문서 접근 권한 검증 완료");
     }
 
-    @Test void deletesDocumentAndRelatedData() {
+    @Test
+    @DisplayName("문서 삭제 시 파일과 SHEETS 열 및 행도 삭제한다")
+    void deletesDocumentAndRelatedData() {
         Document document = documentRepository.saveAndFlush(new Document(1L, basicTemplate("document-delete-template").getId(), "삭제 문서", WritingFormat.SHEETS, "list", null, null, null));
         documentFileRepository.saveAndFlush(new DocumentFile(document.getId(), 1L, DocumentFileRole.ATTACHMENT, "a.txt", "delete-file", "txt", "text/plain", "/a", 1L, "c"));
         sheetColumnRepository.saveAndFlush(new SheetColumn(document.getId(), "name", "이름", SheetColumnType.TEXT, 1));

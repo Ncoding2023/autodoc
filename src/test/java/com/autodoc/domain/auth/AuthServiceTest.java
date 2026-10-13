@@ -8,6 +8,7 @@ import com.autodoc.domain.user.UserRepository;
 import com.autodoc.domain.user.UserRole;
 import com.autodoc.domain.user.UserStatus;
 import com.autodoc.domain.user.dto.UserResponse;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
 @ActiveProfiles("local")
 @Transactional
+@DisplayName("인증 서비스")
 class AuthServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger(AuthServiceTest.class);
@@ -33,6 +35,7 @@ class AuthServiceTest {
     @Autowired private PasswordEncoder passwordEncoder;
 
     @Test
+    @DisplayName("로그인 성공 시 회원 ID를 세션에 저장한다")
     void logsInAndStoresUserIdInSession() {
         User user = userRepository.saveAndFlush(user("auth-login@example.test", UserStatus.ACTIVE));
         MockHttpSession session = new MockHttpSession();
@@ -45,6 +48,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("등록되지 않은 이메일로 로그인할 수 없다")
     void rejectsUnknownEmailOnLogin() {
         MockHttpSession session = new MockHttpSession();
 
@@ -54,6 +58,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("비밀번호가 일치하지 않으면 로그인할 수 없다")
     void rejectsInvalidPasswordOnLogin() {
         User user = userRepository.saveAndFlush(user("auth-password@example.test", UserStatus.ACTIVE));
         MockHttpSession session = new MockHttpSession();
@@ -64,6 +69,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("비활성 회원은 로그인할 수 없다")
     void rejectsInactiveUserOnLogin() {
         User user = userRepository.saveAndFlush(user("auth-inactive@example.test", UserStatus.INACTIVE));
         MockHttpSession session = new MockHttpSession();
@@ -74,6 +80,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("로그아웃 시 세션을 무효화한다")
     void logsOutByInvalidatingSession() {
         MockHttpSession session = new MockHttpSession();
         session.setAttribute(AuthSession.LOGIN_USER_ID, 1L);
@@ -85,6 +92,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("세션에 저장된 현재 로그인 회원을 조회한다")
     void getsCurrentLoggedInUser() {
         User user = userRepository.saveAndFlush(user("auth-me@example.test", UserStatus.ACTIVE));
         MockHttpSession session = new MockHttpSession();
@@ -97,6 +105,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("로그인 정보가 없는 세션으로 현재 회원을 조회할 수 없다")
     void rejectsMissingSessionOnCurrentUserLookup() {
         assertBusinessException(ErrorCode.UNAUTHORIZED, () -> authService.getCurrentUser(new MockHttpSession()));
         log.info("현재 로그인 사용자 세션 검증 완료");

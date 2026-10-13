@@ -1,6 +1,7 @@
 package com.autodoc.domain.sheet;
 
 import com.autodoc.support.LocalPostgreSqlRepositoryTestSupport;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,23 +11,30 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {"spring.jpa.hibernate.ddl-auto=validate", "spring.test.database.replace=none"})
+@DisplayName("SHEETS 행 저장소")
 class SheetRowRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
     private static final Logger log = LoggerFactory.getLogger(SheetRowRepositoryTest.class);
     @Autowired private SheetRowRepository sheetRowRepository;
 
-    @Test void createsSheetRow() {
+    @Test
+    @DisplayName("SHEETS 행을 저장한다")
+    void createsSheetRow() {
         SheetRow saved = sheetRowRepository.saveAndFlush(row(1, "{\"name\":\"create\"}"));
         assertThat(saved.getId()).isNotNull();
         log.info("SHEETS 행 생성 완료: id={}", saved.getId());
     }
 
-    @Test void readsSheetRow() {
+    @Test
+    @DisplayName("SHEETS 행을 조회한다")
+    void readsSheetRow() {
         SheetRow saved = sheetRowRepository.saveAndFlush(row(1, "{\"name\":\"read\"}"));
         assertThat(sheetRowRepository.findById(saved.getId())).get().extracting(SheetRow::getRowData).isEqualTo("{\"name\":\"read\"}");
         log.info("SHEETS 행 조회 완료: id={}", saved.getId());
     }
 
-    @Test void updatesSheetRow() {
+    @Test
+    @DisplayName("SHEETS 행 데이터를 수정한다")
+    void updatesSheetRow() {
         SheetRow saved = sheetRowRepository.saveAndFlush(row(1, "{\"name\":\"before\"}"));
         sheetRowRepository.findById(saved.getId()).orElseThrow().updateRowData("{\"name\":\"after\"}");
         sheetRowRepository.flush();
@@ -34,7 +42,9 @@ class SheetRowRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
         log.info("SHEETS 행 수정 완료: id={}", saved.getId());
     }
 
-    @Test void deletesSheetRow() {
+    @Test
+    @DisplayName("SHEETS 행을 삭제한다")
+    void deletesSheetRow() {
         SheetRow saved = sheetRowRepository.saveAndFlush(row(1, "{\"name\":\"delete\"}"));
         sheetRowRepository.deleteById(saved.getId());
         sheetRowRepository.flush();

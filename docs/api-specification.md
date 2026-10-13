@@ -5,6 +5,7 @@
 | 구분 | Method | API | 기능 | 인증 |
 | --- | --- | --- | --- | --- |
 | 회원 | POST | `/api/users` | 회원가입, 팀 소속 선택 가능 | X |
+| 회원 | GET | `/api/users/signup-teams` | 회원가입용 기존 팀 목록 (ID, 이름) | X |
 | 회원 | GET | `/api/users/{userId}` | 회원 정보 조회 | O |
 | 회원 | PATCH | `/api/users/{userId}` | 회원 이름/소속 팀 수정 | O |
 | 인증 | POST | `/api/auth/login` | 로그인 | X |
@@ -63,6 +64,15 @@
 | 공유 | PATCH | `/api/documents/{documentId}/shares/{shareId}` | 공유 권한/만료일 수정 | O |
 | 공유 | DELETE | `/api/documents/{documentId}/shares/{shareId}` | 문서 공유 해제 | O |
 | 공유 | GET | `/api/shared-documents` | 나에게 공유된 문서 목록 조회 | O |
+
+## 회원가입 팀 정보
+
+회원가입(`POST /api/users`)은 `email`, `password`, `name`과 선택적인 팀 정보를 받는다.
+개인 가입은 `teamId`와 `team`을 생략한다. 기존 팀 가입은 `teamId`를 전달하고,
+새 팀 등록은 `team: { "name": "팀 이름", "description": "선택 설명" }`을 전달한다.
+`teamId`와 `team`은 동시에 전달할 수 없다. 새 팀과 회원은 같은 트랜잭션으로 저장한다.
+회원가입용 팀 목록은 로그인 없이 ID와 이름만 제공한다.
+비밀번호 찾기는 현재 프론트엔드 안내만 제공하며 재설정 API는 구현하지 않았다.
 
 ## 표기
 

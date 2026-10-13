@@ -4,6 +4,7 @@ import type { User } from './types';
 export type LoginRequest = {
   email: string;
   password: string;
+  rememberMe?: boolean;
 };
 
 export const authApi = {

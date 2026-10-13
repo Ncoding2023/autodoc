@@ -1,6 +1,7 @@
 package com.autodoc.domain.template;
 
 import com.autodoc.support.LocalPostgreSqlRepositoryTestSupport;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,23 +11,30 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {"spring.jpa.hibernate.ddl-auto=validate", "spring.test.database.replace=none"})
+@DisplayName("템플릿 파일 저장소")
 class TemplateFileRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
     private static final Logger log = LoggerFactory.getLogger(TemplateFileRepositoryTest.class);
     @Autowired private TemplateFileRepository templateFileRepository;
 
-    @Test void createsTemplateFile() {
+    @Test
+    @DisplayName("템플릿 파일을 저장한다")
+    void createsTemplateFile() {
         TemplateFile saved = templateFileRepository.saveAndFlush(file("create.docx", "create-template"));
         assertThat(saved.getId()).isNotNull();
         log.info("템플릿 파일 생성 완료: id={}", saved.getId());
     }
 
-    @Test void readsTemplateFile() {
+    @Test
+    @DisplayName("템플릿 파일을 조회한다")
+    void readsTemplateFile() {
         TemplateFile saved = templateFileRepository.saveAndFlush(file("read.docx", "read-template"));
         assertThat(templateFileRepository.findById(saved.getId())).get().extracting(TemplateFile::getOriginalName).isEqualTo("read.docx");
         log.info("템플릿 파일 조회 완료: id={}", saved.getId());
     }
 
-    @Test void updatesTemplateFile() {
+    @Test
+    @DisplayName("템플릿 파일 정보를 수정한다")
+    void updatesTemplateFile() {
         TemplateFile saved = templateFileRepository.saveAndFlush(file("before.docx", "update-template"));
         templateFileRepository.findById(saved.getId()).orElseThrow().updateOriginalName("after.docx");
         templateFileRepository.flush();
@@ -34,7 +42,9 @@ class TemplateFileRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
         log.info("템플릿 파일 수정 완료: id={}", saved.getId());
     }
 
-    @Test void deletesTemplateFile() {
+    @Test
+    @DisplayName("템플릿 파일을 삭제한다")
+    void deletesTemplateFile() {
         TemplateFile saved = templateFileRepository.saveAndFlush(file("delete.docx", "delete-template"));
         templateFileRepository.deleteById(saved.getId());
         templateFileRepository.flush();

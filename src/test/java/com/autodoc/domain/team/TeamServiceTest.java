@@ -5,6 +5,7 @@ import com.autodoc.common.exception.ErrorCode;
 import com.autodoc.domain.team.dto.TeamCreateRequest;
 import com.autodoc.domain.team.dto.TeamResponse;
 import com.autodoc.domain.team.dto.TeamUpdateRequest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @SpringBootTest(properties = {"app.seed.enabled=false", "spring.jpa.hibernate.ddl-auto=validate"})
 @ActiveProfiles("local")
 @Transactional
+@DisplayName("팀 서비스")
 class TeamServiceTest {
 
     private static final Logger log = LoggerFactory.getLogger(TeamServiceTest.class);
@@ -27,6 +29,7 @@ class TeamServiceTest {
     @Autowired private TeamRepository teamRepository;
 
     @Test
+    @DisplayName("팀을 생성한다")
     void createsTeam() {
         TeamResponse response = teamService.createTeam(new TeamCreateRequest("service-create-team", "팀 생성 설명"));
 
@@ -36,6 +39,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("중복된 이름으로 팀을 생성할 수 없다")
     void rejectsDuplicateTeamNameOnCreate() {
         teamRepository.saveAndFlush(new Team("service-duplicate-team", "기존 팀"));
 
@@ -45,6 +49,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("팀 목록을 조회한다")
     void getsTeamList() {
         teamRepository.saveAndFlush(new Team("service-list-team-1", "첫 번째 팀"));
         teamRepository.saveAndFlush(new Team("service-list-team-2", "두 번째 팀"));
@@ -55,6 +60,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("팀 ID로 팀을 조회한다")
     void getsTeam() {
         Team team = teamRepository.saveAndFlush(new Team("service-get-team", "팀 조회 설명"));
 
@@ -65,12 +71,14 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("존재하지 않는 팀을 조회할 수 없다")
     void rejectsUnknownTeamOnGet() {
         assertBusinessException(ErrorCode.TEAM_NOT_FOUND, () -> teamService.getTeam(999999L));
         log.info("팀 상세 조회 존재 여부 검증 완료");
     }
 
     @Test
+    @DisplayName("팀 이름과 설명을 수정한다")
     void updatesTeam() {
         Team team = teamRepository.saveAndFlush(new Team("service-update-team", "수정 전 설명"));
 
@@ -82,6 +90,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("팀 수정 시 다른 팀과 같은 이름을 사용할 수 없다")
     void rejectsDuplicateTeamNameOnUpdate() {
         Team target = teamRepository.saveAndFlush(new Team("service-update-target", "수정 대상"));
         teamRepository.saveAndFlush(new Team("service-update-duplicate", "중복 대상"));
@@ -92,6 +101,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("팀을 삭제한다")
     void deletesTeam() {
         Team team = teamRepository.saveAndFlush(new Team("service-delete-team", "삭제 대상"));
 
@@ -102,6 +112,7 @@ class TeamServiceTest {
     }
 
     @Test
+    @DisplayName("존재하지 않는 팀을 삭제할 수 없다")
     void rejectsUnknownTeamOnDelete() {
         assertBusinessException(ErrorCode.TEAM_NOT_FOUND, () -> teamService.deleteTeam(999999L));
         log.info("팀 삭제 대상 존재 여부 검증 완료");

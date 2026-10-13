@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class AuthService {
 
+    public static final int REMEMBER_ME_SECONDS = 7 * 24 * 60 * 60;
+    public static final int DEFAULT_SESSION_SECONDS = 30 * 60;
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -37,6 +40,7 @@ public class AuthService {
         }
 
         session.setAttribute(AuthSession.LOGIN_USER_ID, user.getId());
+        session.setMaxInactiveInterval(request.rememberMe() ? REMEMBER_ME_SECONDS : DEFAULT_SESSION_SECONDS);
         return UserResponse.from(user);
     }
 

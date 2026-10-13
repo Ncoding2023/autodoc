@@ -3,6 +3,9 @@ package com.autodoc.domain.user;
 import com.autodoc.common.exception.BusinessException;
 import com.autodoc.common.exception.ErrorCode;
 import com.autodoc.domain.team.TeamRepository;
+import com.autodoc.domain.team.TeamService;
+import com.autodoc.domain.user.dto.SignupTeamResponse;
+import java.util.List;
 import com.autodoc.domain.user.dto.UserCreateRequest;
 import com.autodoc.domain.user.dto.UserResponse;
 import com.autodoc.domain.user.dto.UserUpdateRequest;
@@ -17,24 +20,40 @@ public class UserService {
     private final UserRepository userRepository;
     private final TeamRepository teamRepository;
     private final PasswordEncoder passwordEncoder;
+    private final TeamService teamService;
 
-    public UserService(UserRepository userRepository, TeamRepository teamRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, TeamRepository teamRepository, PasswordEncoder passwordEncoder, TeamService teamService) {
         this.userRepository = userRepository;
         this.teamRepository = teamRepository;
         this.passwordEncoder = passwordEncoder;
+        this.teamService = teamService;
     }
 
     @Transactional
     public UserResponse signUp(UserCreateRequest request) {
+        if (!request.isTeamSelectionValid()) {
+            throw new BusinessException(ErrorCode.INVALID_REQUEST);
+        }
         if (userRepository.existsByEmail(request.email())) {
             throw new BusinessException(ErrorCode.DUPLICATE_EMAIL);
         }
 
         validateTeamExists(request.teamId());
 
-        User user = new User(request.teamId(), request.email(), passwordEncoder.encode(request.password()), request.name(),
+        Long teamId = request.teamId();
+        if (request.team() != null) {
+            teamId = teamService.createTeam(request.team()).id();
+        }
+        User user = new User(teamId, request.email(), passwordEncoder.encode(request.password()), request.name(),
                 UserRole.USER, UserStatus.ACTIVE);
         return UserResponse.from(userRepository.save(user));
+    }
+
+    public List<SignupTeamResponse> getSignupTeams() {
+        return teamRepository.findAll().stream()
+                .map(team -> new SignupTeamResponse(team.getId(), team.getName()))
+                .sorted(java.util.Comparator.comparing(SignupTeamResponse::name))
+                .toList();
     }
 
     public UserResponse getUser(Long userId) {

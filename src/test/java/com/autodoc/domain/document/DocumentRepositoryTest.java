@@ -2,6 +2,7 @@ package com.autodoc.domain.document;
 
 import com.autodoc.domain.template.WritingFormat;
 import com.autodoc.support.LocalPostgreSqlRepositoryTestSupport;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,23 +12,30 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {"spring.jpa.hibernate.ddl-auto=validate", "spring.test.database.replace=none"})
+@DisplayName("문서 저장소")
 class DocumentRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
     private static final Logger log = LoggerFactory.getLogger(DocumentRepositoryTest.class);
     @Autowired private DocumentRepository documentRepository;
 
-    @Test void createsDocument() {
+    @Test
+    @DisplayName("문서를 생성한다")
+    void createsDocument() {
         Document saved = documentRepository.saveAndFlush(document("create"));
         assertThat(saved.getId()).isNotNull();
         log.info("문서 생성 완료: id={}", saved.getId());
     }
 
-    @Test void readsDocument() {
+    @Test
+    @DisplayName("문서를 조회한다")
+    void readsDocument() {
         Document saved = documentRepository.saveAndFlush(document("read"));
         assertThat(documentRepository.findById(saved.getId())).get().extracting(Document::getTitle).isEqualTo("read");
         log.info("문서 조회 완료: id={}", saved.getId());
     }
 
-    @Test void updatesDocument() {
+    @Test
+    @DisplayName("문서를 수정한다")
+    void updatesDocument() {
         Document saved = documentRepository.saveAndFlush(document("before"));
         documentRepository.findById(saved.getId()).orElseThrow()
                 .updateContent("after", "handover", "updated body", "updated note", "updated caution");
@@ -36,7 +44,9 @@ class DocumentRepositoryTest extends LocalPostgreSqlRepositoryTestSupport {
         log.info("문서 수정 완료: id={}", saved.getId());
     }
 
-    @Test void deletesDocument() {
+    @Test
+    @DisplayName("문서를 삭제한다")
+    void deletesDocument() {
         Document saved = documentRepository.saveAndFlush(document("delete"));
         documentRepository.deleteById(saved.getId());
         documentRepository.flush();
