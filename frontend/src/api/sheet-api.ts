@@ -18,8 +18,8 @@ const documentPath = (documentId: number) => `/documents/${documentId}`;
 export const sheetApi = {
   addColumn: async (documentId: number, request: SheetColumnCreateRequest) =>
     (await apiClient.post<SheetColumn>(`${documentPath(documentId)}/columns`, request)).data,
-  getColumns: async (documentId: number) =>
-    (await apiClient.get<SheetColumn[]>(`${documentPath(documentId)}/columns`)).data,
+  getColumns: async (documentId: number, signal?: AbortSignal) =>
+    (await apiClient.get<SheetColumn[]>(`${documentPath(documentId)}/columns`, { signal })).data,
   updateColumn: async (documentId: number, columnId: number, request: SheetColumnUpdateRequest) =>
     (await apiClient.patch<SheetColumn>(`${documentPath(documentId)}/columns/${columnId}`, request)).data,
   updateColumnOrder: async (documentId: number, columnIds: number[]) =>
@@ -28,8 +28,8 @@ export const sheetApi = {
     apiClient.delete(`${documentPath(documentId)}/columns/${columnId}`),
   addRow: async (documentId: number, request: SheetRowRequest) =>
     (await apiClient.post<SheetRow>(`${documentPath(documentId)}/rows`, request)).data,
-  getRows: async (documentId: number) =>
-    (await apiClient.get<SheetRow[]>(`${documentPath(documentId)}/rows`)).data,
+  getRows: async (documentId: number, signal?: AbortSignal) =>
+    (await apiClient.get<SheetRow[]>(`${documentPath(documentId)}/rows`, { signal })).data,
   updateRow: async (documentId: number, rowId: number, request: SheetRowRequest) =>
     (await apiClient.patch<SheetRow>(`${documentPath(documentId)}/rows/${rowId}`, request)).data,
   removeRow: async (documentId: number, rowId: number) =>

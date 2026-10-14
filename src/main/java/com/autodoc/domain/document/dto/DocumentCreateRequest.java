@@ -4,6 +4,8 @@ import com.autodoc.domain.template.WritingFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import com.autodoc.domain.sheet.dto.SheetCreateRequest;
 
 public record DocumentCreateRequest(
         @NotNull Long templateId,
@@ -12,6 +14,11 @@ public record DocumentCreateRequest(
         @NotBlank @Size(max = 50) String documentType,
         String bodyContent,
         String importantNotes,
-        String cautions
+        String cautions,
+        @Valid SheetCreateRequest sheet
 ) {
+    public DocumentCreateRequest(Long templateId, String title, WritingFormat writingFormat, String documentType,
+                                 String bodyContent, String importantNotes, String cautions) {
+        this(templateId, title, writingFormat, documentType, bodyContent, importantNotes, cautions, null);
+    }
 }

@@ -1,5 +1,10 @@
 import { apiClient } from './client';
-import type { Document, DocumentListItem, WritingFormat } from './types';
+import type { Document, DocumentListItem, SheetColumnType, WritingFormat } from './types';
+
+export type SheetDraft = {
+  columns: { columnKey: string; columnName: string; columnType: SheetColumnType }[];
+  rows: { rowData: Record<string, unknown> }[];
+};
 
 export type DocumentCreateRequest = {
   templateId: number;
@@ -9,6 +14,7 @@ export type DocumentCreateRequest = {
   bodyContent?: string | null;
   importantNotes?: string | null;
   cautions?: string | null;
+  sheet?: SheetDraft;
 };
 
 export type DocumentUpdateRequest = Omit<DocumentCreateRequest, 'templateId' | 'writingFormat'>;

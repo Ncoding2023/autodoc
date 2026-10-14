@@ -1,9 +1,11 @@
 import { redirect, type ActionFunctionArgs, type LoaderFunctionArgs } from 'react-router-dom';
 import { documentApi } from '../api/document-api';
+import { sheetApi } from '../api/sheet-api';
 import { templateApi } from '../api/template-api';
 import { getApiError } from '../api/client';
 import type { Document, DocumentTemplate } from '../api/types';
 import { readWritingFormat } from './template-selection';
+import { readSheetDraft } from '../components/sheet-data';
 
 function readId(value: string | null | undefined) {
   if (!value || !/^[1-9]\d*$/.test(value) || !Number.isSafeInteger(Number(value))) {
@@ -53,6 +55,21 @@ export async function loadDocumentTemplate({ request }: LoaderFunctionArgs) {
   }
 }
 
+export async function loadDocumentForEdit(args: LoaderFunctionArgs) {
+  const document = await loadDocument(args);
+  if (document.writingFormat !== 'SHEETS') return { document };
+  try {
+    const [columns, rows] = await Promise.all([
+      sheetApi.getColumns(document.id, args.request.signal),
+      sheetApi.getRows(document.id, args.request.signal),
+    ]);
+    return { document, sheet: {
+      columns: [...columns].sort((a, b) => a.columnOrder - b.columnOrder),
+      rows: [...rows].sort((a, b) => a.rowNo - b.rowNo).map(({ rowData }) => ({ rowData })),
+    } };
+  } catch (failure) { handleFailure(failure, args.request); }
+}
+
 export function readDocumentInput(data: FormData, source: DocumentTemplate | Document) {
   const title = String(data.get('title') ?? '').trim();
   const documentType = 'scope' in source ? source.documentType : String(data.get('documentType') ?? '').trim();
@@ -77,10 +94,13 @@ function actionFailure(failure: unknown, request: Request, fallback = '저장하
 export async function createDocument(args: ActionFunctionArgs) {
   const { request } = args;
   const template = await loadDocumentTemplate(args);
-  const result = readDocumentInput(await request.formData(), template);
+  const data = await request.formData();
+  const result = readDocumentInput(data, template);
   if (result.error) return { error: result.error };
+  const draft = template.writingFormat === 'SHEETS' ? readSheetDraft(String(data.get('sheetDraft') ?? '')) : {};
+  if (draft.error) return { error: draft.error };
   try {
-    const document = await documentApi.create({ ...result.input!, templateId: template.id, writingFormat: template.writingFormat });
+    const document = await documentApi.create({ ...result.input!, templateId: template.id, writingFormat: template.writingFormat, sheet: draft.sheet });
     return redirect(`/documents/${document.id}?created=1`);
   } catch (failure) { return actionFailure(failure, request); }
 }
@@ -88,10 +108,13 @@ export async function createDocument(args: ActionFunctionArgs) {
 export async function updateDocument(args: ActionFunctionArgs) {
   const { request } = args;
   const document = await loadDocument(args);
-  const result = readDocumentInput(await request.formData(), document);
+  const data = await request.formData();
+  const result = readDocumentInput(data, document);
   if (result.error) return { error: result.error };
+  const draft = document.writingFormat === 'SHEETS' ? readSheetDraft(String(data.get('sheetDraft') ?? '')) : {};
+  if (draft.error) return { error: draft.error };
   try {
-    await documentApi.update(document.id, result.input!);
+    await documentApi.update(document.id, { ...result.input!, sheet: draft.sheet });
     return redirect(`/documents/${document.id}?updated=1`);
   } catch (failure) { return actionFailure(failure, request); }
 }

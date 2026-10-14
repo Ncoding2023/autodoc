@@ -15,6 +15,19 @@ let template;
 let createCalls;
 let deleteCalls;
 
+test('시트 편집기에 기존 열·행과 0·아니오 값을 표시한다', async () => {
+  const { SheetDraftEditor } = await server.ssrLoadModule('/src/components/SheetDraftEditor.tsx');
+  const html = renderToString(createElement(SheetDraftEditor, { initialSheet: {
+    columns: [{ columnKey: 'quantity', columnName: '수량', columnType: 'NUMBER' }, { columnKey: 'done', columnName: '완료', columnType: 'BOOLEAN' }],
+    rows: [{ rowData: { quantity: 0, done: false } }],
+  } }));
+  assert.match(html, /value="수량"/);
+  assert.match(html, /value="0"/);
+  assert.match(html, /value="false" selected/);
+  assert.match(html, /행 추가/);
+  console.info('시트 편집기의 기존 열·행 표시 검증 완료');
+});
+
 before(async () => {
   server = await createServer({ server: { middlewareMode: true }, appType: 'custom' });
   routes = await server.ssrLoadModule('/src/pages/document-routes.ts');
@@ -128,14 +141,17 @@ test('형식이 다른 템플릿과 사용자 템플릿을 기본 템플릿으�
   console.info('템플릿 형식 및 기본 템플릿 범위 검증 완료');
 });
 
-test('SHEETS 정보 수정 시 화면에 없는 기존 콘텐츠를 보존한다', async () => {
+test('SHEETS 수정 시 열·행을 함께 전달하고 기존 콘텐츠를 보존한다', async () => {
   documents.set(42, { id: 42, templateId: 7, title: '기존 문서', documentType: 'list', writingFormat: 'SHEETS', status: 'DRAFT', bodyContent: '기존 데이터', importantNotes: '기존 중요', cautions: '기존 주의' });
-  await routes.updateDocument(args('/documents/42/edit', { title: '수정 제목', documentType: 'list', bodyContent: '주입 데이터' }, '42'));
+  const sheet = { columns: [{ columnKey: 'done', columnName: '완료', columnType: 'BOOLEAN' }, { columnKey: 'quantity', columnName: '수량', columnType: 'NUMBER' }], rows: [{ rowData: { done: false, quantity: 0 } }] };
+  const response = await routes.updateDocument(args('/documents/42/edit', { title: '수정 제목', documentType: 'list', bodyContent: '주입 데이터', sheetDraft: JSON.stringify(sheet) }, '42'));
+  assert.equal(response.status, 302);
+  assert.deepEqual(documents.get(42).sheet, sheet);
   assert.equal(documents.get(42).title, '수정 제목');
   assert.equal(documents.get(42).bodyContent, '기존 데이터');
   assert.equal(documents.get(42).importantNotes, '기존 중요');
   assert.equal(documents.get(42).cautions, '기존 주의');
-  console.info('SHEETS 수정 시 기존 콘텐츠 보존 검증 완료');
+  console.info('SHEETS 수정 시 열·행 전달 및 기존 콘텐츠 보존 검증 완료');
 });
 
 test('권한 거부와 삭제된 문서를 구분하고 세션 만료 시 로그인으로 이동한다', async () => {
@@ -166,4 +182,46 @@ test('서버 저장·삭제 실패 시 재시도 가능한 오류를 반환한�
   documentApi.remove = async () => { throw new Error('offline'); };
   assert.match((await routes.deleteDocument(args('/documents/42', { intent: 'delete' }, '42'))).error, /삭제하지 못했습니다/);
   console.info('문서 저장·삭제 실패 처리 검증 완료');
+});
+
+test('SHEETS 생성 화면은 제목·열·행을 단일 생성 요청으로 전송한다', async () => {
+  template.writingFormat = 'SHEETS';
+  const sheet = {
+    columns: [{ columnKey: 'amount', columnName: '수량', columnType: 'NUMBER' }, { columnKey: 'done', columnName: '완료', columnType: 'BOOLEAN' }],
+    rows: [{ rowData: { amount: 0, done: false } }],
+  };
+  const result = await routes.createDocument(args('/documents/new/write?format=SHEETS&templateId=7', { title: '한 번에 저장', sheetDraft: JSON.stringify(sheet) }));
+  assert.equal(result.headers.get('Location'), '/documents/42?created=1');
+  assert.equal(createCalls, 1);
+  assert.deepEqual(documents.get(42).sheet, sheet);
+  console.info('시트 문서·열·행 단일 생성 요청 검증 완료');
+});
+
+test('잘못된 시트 구조와 입력값은 생성 API로 전송하지 않는다', async () => {
+  template.writingFormat = 'SHEETS';
+  for (const sheetDraft of ['invalid', JSON.stringify({ columns: [], rows: [{ rowData: { unknown: 1 } }] }),
+    JSON.stringify({ columns: [{ columnKey: 'done', columnName: '완료', columnType: 'BOOLEAN' }], rows: [{ rowData: { done: 'false' } }] })]) {
+    assert.ok((await routes.createDocument(args('/documents/new/write?format=SHEETS&templateId=7', { title: '검증', sheetDraft }))).error);
+  }
+  assert.equal(createCalls, 0);
+  console.info('시트 초안 검증 실패 시 생성 요청 차단 검증 완료');
+});
+
+test('시트 생성 폼에 템플릿 열과 행 추가 버튼을 표시하고 중첩 폼은 만들지 않는다', async () => {
+  template.writingFormat = 'SHEETS';
+  template.structureData = '{"columns":[{"key":"task","name":"업무","type":"TEXT"}]}';
+  const { DocumentFormPage } = await server.ssrLoadModule('/src/pages/DocumentFormPage.tsx');
+  const router = createMemoryRouter([{ path: '/documents/new/write', element: createElement(DocumentFormPage, { creating: true }), loader: async () => template }],
+    { initialEntries: ['/documents/new/write?format=SHEETS&templateId=7'] });
+  try {
+    if (!router.state.initialized) await new Promise((resolve) => {
+      const unsubscribe = router.subscribe((state) => { if (state.initialized) { unsubscribe(); resolve(); } });
+    });
+    const html = renderToString(createElement(RouterProvider, { router }));
+    assert.match(html, /name="sheetDraft"/);
+    assert.match(html, /value="업무"/);
+    assert.match(html, /행 추가/);
+    assert.equal((html.match(/<form\b/g) ?? []).length, 1);
+    console.info('문서 생성 화면 내 시트 구성 및 단일 폼 검증 완료');
+  } finally { router.dispose(); }
 });

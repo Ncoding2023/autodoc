@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test:documents": "node --test scripts/document-flow.test.mjs"
+    "test:documents": "node --test scripts/document-flow.test.mjs",
+    "test:sheets": "node --test scripts/sheet-flow.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.0",

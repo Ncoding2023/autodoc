@@ -1,9 +1,13 @@
 import { Form, Link, useActionData, useLoaderData, useNavigation } from 'react-router-dom';
 import type { Document, DocumentTemplate } from '../api/types';
 import { FormatBadge, inputClassName, primaryClassName, secondaryClassName } from '../components/document-ui';
+import { SheetDraftEditor } from '../components/SheetDraftEditor';
+import type { SheetDraft } from '../api/document-api';
 
 export function DocumentFormPage({ creating = false }: { creating?: boolean }) {
-  const source = useLoaderData() as DocumentTemplate | Document;
+  const loaded = useLoaderData() as DocumentTemplate | { document: Document; sheet?: SheetDraft };
+  const source = 'document' in loaded ? loaded.document : loaded;
+  const initialSheet = 'document' in loaded ? loaded.sheet : undefined;
   const document = 'scope' in source ? null : source;
   const action = useActionData() as { error?: string } | undefined;
   const navigation = useNavigation();
@@ -23,7 +27,7 @@ export function DocumentFormPage({ creating = false }: { creating?: boolean }) {
               <label htmlFor="important-notes" className="block text-sm font-semibold">중요 사항<textarea id="important-notes" name="importantNotes" rows={5} defaultValue={document?.importantNotes ?? ''} className={`${inputClassName} resize-y`} /></label>
               <label htmlFor="cautions" className="block text-sm font-semibold">주의 사항<textarea id="cautions" name="cautions" rows={5} defaultValue={document?.cautions ?? ''} className={`${inputClassName} resize-y`} /></label>
             </div>
-          </> : <p className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-sm leading-6 text-slate-500">지금은 SHEETS 문서의 기본 정보를 저장할 수 있습니다. 열·행 편집은 다음 단계에서 제공됩니다.</p>}
+          </> : <SheetDraftEditor key={source.id} template={'scope' in source ? source : undefined} initialSheet={initialSheet} />}
           <div className="flex flex-wrap justify-end gap-3"><Link to={document ? `/documents/${document.id}` : `/documents/new?format=${source.writingFormat}&templateId=${source.id}`} aria-disabled={pending} tabIndex={pending ? -1 : undefined} onClick={(event) => { if (pending) event.preventDefault(); }} className={`${secondaryClassName} ${pending ? 'opacity-60' : ''}`}>취소</Link><button type="submit" className={primaryClassName}>{pending ? '저장 중…' : '저장'}</button></div>
         </fieldset>
       </Form>

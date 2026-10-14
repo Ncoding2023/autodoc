@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { Form, Link, useActionData, useLoaderData, useNavigation, useSearchParams } from 'react-router-dom';
 import type { Document } from '../api/types';
 import { FormatBadge, StatusBadge, primaryClassName, secondaryClassName } from '../components/document-ui';
+import { SheetEditor } from '../components/SheetEditor';
 
 export function DocumentDetailPage() {
   const document = useLoaderData() as Document;
@@ -21,7 +22,7 @@ export function DocumentDetailPage() {
       {document.writingFormat === 'DOCS' ? <div className="mt-8 space-y-6">
         <Content title="본문" value={document.bodyContent} />
         <div className="grid gap-6 md:grid-cols-2"><Content title="중요 사항" value={document.importantNotes} /><Content title="주의 사항" value={document.cautions} /></div>
-      </div> : <p className="mt-8 rounded-xl border border-slate-200 bg-slate-50 p-8 text-sm leading-6 text-slate-500">SHEETS 문서가 저장되어 있습니다. 열·행 조회와 편집 화면은 다음 단계에서 제공됩니다.</p>}
+      </div> : <SheetEditor key={document.id} documentId={document.id} />}
       <dialog ref={dialog} aria-labelledby="delete-document-title" aria-describedby="delete-document-description" className="m-auto w-[calc(100%-32px)] max-w-lg rounded-xl border border-slate-200 bg-white p-7 backdrop:bg-[#172b4d66]">
         <h2 id="delete-document-title" className="text-xl font-bold">문서를 삭제하시겠습니까?</h2><p id="delete-document-description" className="mt-4 text-sm leading-6 text-slate-500">‘{document.title}’ 문서와 연결된 데이터가 삭제됩니다. 삭제한 문서는 복구할 수 없습니다.</p>
         {action?.error && <p role="alert" className="mt-4 text-sm text-red-700">{action.error}</p>}
