@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link, NavLink, Outlet, useLoaderData, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLoaderData, useNavigate, useNavigation } from 'react-router-dom';
 import { authApi } from '../api/auth-api';
 import { getApiError } from '../api/client';
 import type { User } from '../api/types';
@@ -15,6 +15,7 @@ const focusClassName = 'focus-visible:outline-2 focus-visible:outline-offset-4 f
 export function AppLayout() {
   const user = useLoaderData() as User;
   const navigate = useNavigate();
+  const navigation = useNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const [error, setError] = useState('');
@@ -53,7 +54,8 @@ export function AppLayout() {
           </nav>
         </div>
       </header>
-      <main id="main-content" tabIndex={-1} className="mx-auto max-w-[1440px] px-4 py-8 sm:px-8 sm:py-10">
+      <main id="main-content" tabIndex={-1} aria-busy={navigation.state !== 'idle'} className="mx-auto max-w-[1440px] px-4 py-8 sm:px-8 sm:py-10">
+        {navigation.state === 'loading' && <p role="status" className="mb-6 rounded-lg bg-blue-50 p-3 text-sm text-blue-700">화면을 불러오는 중입니다.</p>}
         {error && <p role="alert" className="mb-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">{error}</p>}
         <Outlet context={user} />
       </main>

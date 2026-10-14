@@ -37,7 +37,10 @@ public class DocumentService {
 
     @Transactional
     public DocumentResponse createDocument(Long currentUserId, DocumentCreateRequest request) {
-        validateTemplateAccess(request.templateId(), currentUserId);
+        DocumentTemplate template = validateTemplateAccess(request.templateId(), currentUserId);
+        if (template.getWritingFormat() != request.writingFormat()) {
+            throw new BusinessException(ErrorCode.INVALID_DOCUMENT_FORMAT);
+        }
         Document document = new Document(currentUserId, request.templateId(), request.title(), request.writingFormat(), request.documentType(),
                 request.bodyContent(), request.importantNotes(), request.cautions());
         return DocumentResponse.from(documentRepository.save(document));
@@ -76,11 +79,12 @@ public class DocumentService {
         return document;
     }
 
-    private void validateTemplateAccess(Long templateId, Long currentUserId) {
+    private DocumentTemplate validateTemplateAccess(Long templateId, Long currentUserId) {
         DocumentTemplate template = templateRepository.findById(templateId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.TEMPLATE_NOT_FOUND));
         if (template.getTemplateScope() == TemplateScope.USER && !currentUserId.equals(template.getOwnerUserId())) {
             throw new BusinessException(ErrorCode.ACCESS_DENIED);
         }
+        return template;
     }
 }

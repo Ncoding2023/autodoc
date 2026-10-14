@@ -12,8 +12,8 @@ export type TemplateCreateRequest = {
 export type TemplateUpdateRequest = Omit<TemplateCreateRequest, 'writingFormat'>;
 
 export const templateApi = {
-  getAll: async () => (await apiClient.get<DocumentTemplate[]>('/templates')).data,
-  getById: async (templateId: number) => (await apiClient.get<DocumentTemplate>(`/templates/${templateId}`)).data,
+  getAll: async (signal?: AbortSignal) => (await apiClient.get<DocumentTemplate[]>('/templates', { signal })).data,
+  getById: async (templateId: number, signal?: AbortSignal) => (await apiClient.get<DocumentTemplate>(`/templates/${templateId}`, { signal })).data,
   create: async (request: TemplateCreateRequest) => (await apiClient.post<DocumentTemplate>('/templates', request)).data,
   update: async (templateId: number, request: TemplateUpdateRequest) =>
     (await apiClient.patch<DocumentTemplate>(`/templates/${templateId}`, request)).data,

@@ -40,6 +40,49 @@ class DocumentServiceTest {
     @Autowired private SheetRowRepository sheetRowRepository;
 
     @Test
+    @DisplayName("다른 회원의 사용자 템플릿으로 문서를 생성할 수 없다")
+    void rejectsOtherUsersTemplateOnCreate() {
+        DocumentTemplate template = templateRepository.saveAndFlush(new DocumentTemplate(2L,
+                "document-other-user-template", WritingFormat.DOCS, "report", "{}", "{}"));
+        assertThatThrownBy(() -> documentService.createDocument(1L, request(template.getId(), "접근 불가 템플릿")))
+                .isInstanceOfSatisfying(BusinessException.class,
+                        exception -> assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED));
+        log.info("다른 회원의 템플릿을 사용한 문서 생성 거부 검증 완료");
+    }
+
+    @Test
+    @DisplayName("다른 회원의 문서를 수정하거나 삭제할 수 없다")
+    void rejectsOtherUsersDocumentMutations() {
+        Document document = documentRepository.saveAndFlush(new Document(2L,
+                basicTemplate("document-mutation-permission-template").getId(), "원래 문서",
+                WritingFormat.DOCS, "report", "원래 본문", null, null));
+        assertThatThrownBy(() -> documentService.updateDocument(document.getId(), 1L,
+                new DocumentUpdateRequest("변경 시도", "report", "변경 본문", null, null)))
+                .isInstanceOfSatisfying(BusinessException.class,
+                        exception -> assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED));
+        assertThatThrownBy(() -> documentService.deleteDocument(document.getId(), 1L))
+                .isInstanceOfSatisfying(BusinessException.class,
+                        exception -> assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.ACCESS_DENIED));
+        assertThat(documentRepository.findById(document.getId())).isPresent();
+        assertThat(document.getTitle()).isEqualTo("원래 문서");
+        assertThat(document.getBodyContent()).isEqualTo("원래 본문");
+        log.info("다른 회원의 문서 수정 및 삭제 거부 검증 완료");
+    }
+
+    @Test
+    @DisplayName("템플릿과 작성 형식이 다른 문서는 생성할 수 없다")
+    void rejectsMismatchedTemplateFormat() {
+        DocumentTemplate template = basicTemplate("document-mismatched-format");
+        long countBefore = documentRepository.count();
+        assertThatThrownBy(() -> documentService.createDocument(1L,
+                new DocumentCreateRequest(template.getId(), "형식 불일치", WritingFormat.SHEETS, "list", null, null, null)))
+                .isInstanceOfSatisfying(BusinessException.class,
+                        exception -> assertThat(exception.getErrorCode()).isEqualTo(ErrorCode.INVALID_DOCUMENT_FORMAT));
+        assertThat(documentRepository.count()).isEqualTo(countBefore);
+        log.info("템플릿과 문서 작성 형식 불일치 거부 검증 완료");
+    }
+
+    @Test
     @DisplayName("문서를 생성한다")
     void createsDocument() {
         DocumentTemplate template = basicTemplate("document-create-template");
@@ -64,6 +107,10 @@ class DocumentServiceTest {
         Document document = documentRepository.saveAndFlush(new Document(1L, basicTemplate("document-update-template").getId(), "수정 전", WritingFormat.DOCS, "report", null, null, null));
         DocumentResponse response = documentService.updateDocument(document.getId(), 1L, new DocumentUpdateRequest("수정 후", "handover", "본문", "중요", "주의"));
         assertThat(response.title()).isEqualTo("수정 후");
+        assertThat(response.documentType()).isEqualTo("handover");
+        assertThat(response.bodyContent()).isEqualTo("본문");
+        assertThat(response.importantNotes()).isEqualTo("중요");
+        assertThat(response.cautions()).isEqualTo("주의");
         log.info("문서 수정 서비스 검증 완료: documentId={}", document.getId());
     }
 

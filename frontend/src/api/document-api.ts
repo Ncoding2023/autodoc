@@ -15,8 +15,8 @@ export type DocumentUpdateRequest = Omit<DocumentCreateRequest, 'templateId' | '
 
 export const documentApi = {
   create: async (request: DocumentCreateRequest) => (await apiClient.post<Document>('/documents', request)).data,
-  getMyDocuments: async () => (await apiClient.get<DocumentListItem[]>('/documents')).data,
-  getById: async (documentId: number) => (await apiClient.get<Document>(`/documents/${documentId}`)).data,
+  getMyDocuments: async (signal?: AbortSignal) => (await apiClient.get<DocumentListItem[]>('/documents', { signal })).data,
+  getById: async (documentId: number, signal?: AbortSignal) => (await apiClient.get<Document>(`/documents/${documentId}`, { signal })).data,
   update: async (documentId: number, request: DocumentUpdateRequest) =>
     (await apiClient.patch<Document>(`/documents/${documentId}`, request)).data,
   remove: async (documentId: number) => apiClient.delete(`/documents/${documentId}`),
