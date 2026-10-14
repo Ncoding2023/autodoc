@@ -15,6 +15,21 @@ let template;
 let createCalls;
 let deleteCalls;
 
+test('DOCS 미리보기에 현재 입력한 문서 데이터를 빠짐없이 전달한다', async () => {
+  const { DocsPreview, readDocsPreview } = await server.ssrLoadModule('/src/components/DocsPreview.tsx');
+  const values = { title: '저장 전 제목', documentType: '업무보고서', bodyContent: '첫 번째 줄\n두 번째 줄 <script>alert(1)</script>', importantNotes: '중요한 전달 사항', cautions: '주의할 내용' };
+  const form = new FormData();
+  for (const [key, value] of Object.entries(values)) form.set(key, value);
+  const content = readDocsPreview(form);
+  assert.deepEqual(content, values);
+  const html = renderToString(createElement(DocsPreview, { content }));
+  for (const text of ['저장 전 제목', '업무보고서', '첫 번째 줄\n두 번째 줄', '중요한 전달 사항', '주의할 내용']) assert.ok(html.includes(text));
+  assert.ok(html.includes('&lt;script&gt;'));
+  assert.ok(!html.includes('<script>'));
+  assert.equal(createCalls, 0);
+  console.info('DOCS 미리보기 문서 데이터 전달 검증 완료');
+});
+
 test('시트 편집기에 기존 열·행과 0·아니오 값을 표시한다', async () => {
   const { SheetDraftEditor } = await server.ssrLoadModule('/src/components/SheetDraftEditor.tsx');
   const html = renderToString(createElement(SheetDraftEditor, { initialSheet: {

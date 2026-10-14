@@ -3,6 +3,7 @@ import { Form, Link, useActionData, useLoaderData, useNavigation, useSearchParam
 import type { Document } from '../api/types';
 import { FormatBadge, StatusBadge, primaryClassName, secondaryClassName } from '../components/document-ui';
 import { SheetEditor } from '../components/SheetEditor';
+import { DocsPreview, DocsPreviewButton } from '../components/DocsPreview';
 
 export function DocumentDetailPage() {
   const document = useLoaderData() as Document;
@@ -19,9 +20,9 @@ export function DocumentDetailPage() {
       </div>
       {(params.get('created') === '1' || params.get('updated') === '1') && <p role="status" className="mt-6 rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700">문서가 저장되었습니다.</p>}
       {action?.error && <p role="alert" className="mt-6 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">{action.error}</p>}
-      {document.writingFormat === 'DOCS' ? <div className="mt-8 space-y-6">
-        <Content title="본문" value={document.bodyContent} />
-        <div className="grid gap-6 md:grid-cols-2"><Content title="중요 사항" value={document.importantNotes} /><Content title="주의 사항" value={document.cautions} /></div>
+      {document.writingFormat === 'DOCS' ? <div className="mt-8 space-y-4">
+        <div className="flex items-center justify-between gap-4"><h2 className="text-lg font-semibold">문서 내용</h2><DocsPreviewButton readContent={() => document} /></div>
+        <DocsPreview content={document} />
       </div> : <SheetEditor key={document.id} documentId={document.id} />}
       <dialog ref={dialog} aria-labelledby="delete-document-title" aria-describedby="delete-document-description" className="m-auto w-[calc(100%-32px)] max-w-lg rounded-xl border border-slate-200 bg-white p-7 backdrop:bg-[#172b4d66]">
         <h2 id="delete-document-title" className="text-xl font-bold">문서를 삭제하시겠습니까?</h2><p id="delete-document-description" className="mt-4 text-sm leading-6 text-slate-500">‘{document.title}’ 문서와 연결된 데이터가 삭제됩니다. 삭제한 문서는 복구할 수 없습니다.</p>
@@ -30,8 +31,4 @@ export function DocumentDetailPage() {
       </dialog>
     </section>
   );
-}
-
-function Content({ title, value }: { title: string; value: string | null }) {
-  return <section className="rounded-xl border border-slate-200 p-6"><h2 className="mb-4 text-base font-semibold">{title}</h2><p className={`text-sm leading-7 whitespace-pre-wrap [overflow-wrap:anywhere] ${value ? '' : 'text-slate-400'}`}>{value || '입력된 내용이 없습니다.'}</p></section>;
 }
