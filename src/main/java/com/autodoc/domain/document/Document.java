@@ -10,6 +10,7 @@ public class Document {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "document_id") private Long id;
     @Column(name = "owner_user_id", nullable = false) private Long ownerUserId;
     @Column(name = "template_id", nullable = false) private Long templateId;
+    @Column(name = "source_template_file_id", updatable = false) private Long sourceTemplateFileId;
     @Column(nullable = false, length = 255) private String title;
     @Enumerated(EnumType.STRING) @Column(name = "writing_format", nullable = false, length = 10) private WritingFormat writingFormat;
     @Column(name = "document_type", nullable = false, length = 50) private String documentType;
@@ -22,6 +23,10 @@ public class Document {
     protected Document() {}
     public Document(Long ownerUserId, Long templateId, String title, WritingFormat writingFormat, String documentType,
                     String bodyContent, String importantNotes, String cautions) {
+        this(ownerUserId, templateId, title, writingFormat, documentType, bodyContent, importantNotes, cautions, null);
+    }
+    public Document(Long ownerUserId, Long templateId, String title, WritingFormat writingFormat, String documentType,
+                    String bodyContent, String importantNotes, String cautions, Long sourceTemplateFileId) {
         this.ownerUserId = ownerUserId;
         this.templateId = templateId;
         this.title = title;
@@ -30,10 +35,12 @@ public class Document {
         this.bodyContent = bodyContent;
         this.importantNotes = importantNotes;
         this.cautions = cautions;
+        this.sourceTemplateFileId = sourceTemplateFileId;
     }
     public Long getId() { return id; }
     public Long getOwnerUserId() { return ownerUserId; }
     public Long getTemplateId() { return templateId; }
+    public Long getSourceTemplateFileId() { return sourceTemplateFileId; }
     public String getTitle() { return title; }
     public WritingFormat getWritingFormat() { return writingFormat; }
     public String getDocumentType() { return documentType; }

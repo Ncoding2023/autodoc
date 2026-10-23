@@ -47,6 +47,14 @@
 | `DATE` | 날짜 |
 | `BOOLEAN` | 참/거짓 |
 
+## DOCS 입력 형식 (`TemplateFieldType`)
+
+- `TEXT`: 짧은 글
+- `LONG_TEXT`: 긴 글
+- `DATE`: 날짜 (`YYYY-MM-DD`)
+
+항목명 변경과 무관하게 연결 키와 입력 형식은 유지한다. 항목별 필수 여부 설정은 사용하지 않는다.
+
 ## 템플릿 범위 (`TemplateScope`)
 
 | 키값 | 목록명 |
